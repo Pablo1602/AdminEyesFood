@@ -1147,7 +1147,7 @@ class Alimentos extends CI_Controller {
             $response = json_decode($resp2, true);
             $comentarios = json_decode($resp, true);
             for($i = 0, $size = count($comentarios); $i < $size; ++$i) {
-                $usuario = $this->correo($comentarios[$i]['idUsuario']);
+                $usuario = $this->correo($comentarios[$i]['colaborador']);
                 array_push($comentarios[$i], $usuario['Correo']);
             //$people[$i]['salt'] = mt_rand(000000, 999999);
             }
