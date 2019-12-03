@@ -44,7 +44,7 @@ function afterLoginCallBack($data, $obj) {
     if (count($data)) {
     //save data in session
         $_SESSION["data"] = $data;
-        $obj->formRedirection("https://admineyesfood.herokuapp.com/AdminEyesFood/Usuarios/index");
+        $obj->formRedirection("https://admineyesfood.herokuapp.com/Usuarios/index");
     }
     else{
         //no record found so don't redirect
@@ -57,7 +57,7 @@ function afterLoginCallBack2($data, $obj) {
     if (count($data)) {
     //save data in session
         $_SESSION["data"] = $data;
-        $obj->formRedirection("https://admineyesfood.herokuapp.com/AdminEyesFood/Expertos/perfil");
+        $obj->formRedirection("https://admineyesfood.herokuapp.com/Expertos/perfil");
     }
     else{
         //no record found so don't redirect
@@ -69,7 +69,7 @@ function afterLoginCallBackTienda($data, $obj) {
     if (count($data)) {
     //save data in session
         $_SESSION["data"] = $data;
-        $obj->formRedirection("https://admineyesfood.herokuapp.com/AdminEyesFood/Tiendas/index");
+        $obj->formRedirection("https://admineyesfood.herokuapp.com/Tiendas/index");
     }
     else{
         //no record found so don't redirect
@@ -85,15 +85,15 @@ function beforeloginCallbackTienda($data, $obj) {
 }
 
 function afterRegisterCallBack($data, $obj) {
-    $obj->formRedirection("https://admineyesfood.herokuapp.com/AdminEyesFood/Login/registroDone");
+    $obj->formRedirection("https://admineyesfood.herokuapp.com/Login/registroDone");
 }
 
 function afterUpdateCallBack($data, $obj) {
     //$obj->formRedirection(base_url());
-    $obj->formRedirection("https://admineyesfood.herokuapp.com/AdminEyesFood/Tiendas");
+    $obj->formRedirection("https://admineyesfood.herokuapp.com/Tiendas");
 }
 
 function afterUpdateCallBack2($data, $obj) {
     //$obj->formRedirection(base_url());
-    $obj->formRedirection("https://admineyesfood.herokuapp.com/AdminEyesFood/Usuarios/perfil");
+    $obj->formRedirection("https://admineyesfood.herokuapp.com/Usuarios/perfil");
 }
