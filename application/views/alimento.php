@@ -30,6 +30,8 @@ echo $alimento;
         <h4 class="modal-title" id="myModalLabel">Rechazar</h4>
         Esta seguro de rechazar el alimento <?php echo ($ind["idAlimentoNuevo"]); ?> ?
       </div>
+      <h5>Comentario de rechazo</h5>
+      <input type="text" style="resize:none" rows="5" id="texto">
       <div class="modal-footer">
         <button type="button" class="btn btn-default" id="modal-btn-2-si">Si</button>
         <button type="button" class="btn btn-primary" id="modal-btn-2-no">No</button>
@@ -69,6 +71,7 @@ modalConfirm(function(confirm){
 var modalConfirm = function(callback){
   
   $("#btn-reject").on("click", function(){
+    $("#mi-modal-2 input[type=text]").val('');
     $("#mi-modal-2").modal('show');
   });
 
@@ -86,7 +89,7 @@ var modalConfirm = function(callback){
 modalConfirm(function(confirm){
   if(confirm){
     //Acciones si el usuario confirma
-    window.location.href = "<?php echo base_url().'Alimentos/rechazar/'.$ind["idAlimentoNuevo"]; ?>";
+    window.location.href = "<?php echo base_url().'Alimentos/rechazar/'.$ind["idAlimentoNuevo"].'/'?>"+$("#texto").val().trim();
     //alert('El alimento ha sido rechazado exitosamente');
   }else{
     //Acciones si el usuario no confirma

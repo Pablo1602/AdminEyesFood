@@ -18,8 +18,8 @@ class Expertos extends CI_Controller {
             $pdocrud->crudTableCol(array("idExperto","Nombre","Apellido","Email","Especialidad","Telefono", "Direccion", "Descripcion", "PaginaWeb", "Reputacion", "rol"));
             $pdocrud->formFields(array("nombre","apellido","email","especialidad","telefono", "direccion", "descripcion", "paginaWeb", "reputacion", "rol"));
             $pdocrud->editFormFields(array("nombre","apellido","email","especialidad","telefono", "direccion", "descripcion", "paginaWeb", "reputacion", "rol"));
-            $pdocrud->tableColFormatting("rol", "replace",array("0" =>"Nutricionista"));
-            $pdocrud->tableColFormatting("rol", "replace",array("1" =>"Coucher"));
+            $pdocrud->tableColFormatting("rol", "replace",array("2" =>"Nutricionista"));
+            $pdocrud->tableColFormatting("rol", "replace",array("3" =>"Coach"));
             $pdocrud->fieldTypes("rol", "radio");//change gender to radio button
             $roles = array("2"=>"Nutricionista","3"=>"Coucher");
             $pdocrud->fieldDataBinding("rol", $roles, "", "","array");//add data for radio button
@@ -31,6 +31,7 @@ class Expertos extends CI_Controller {
             $subTitleContent = "Administracion de Expertos";
             $level = "Expertos";
             $data['expertos'] = $expertos;
+            $pdocrud->buttonHide($buttonname="cancel");
             $this->template("Expertos", $username, $nombreApellido, $titleContent, $subTitleContent, $level, "expertos", $data, $rol);
         }else{
              $this->load->view('403');

@@ -23,6 +23,7 @@ class Login extends CI_Controller {
         $pdocrud->setUserSession("apellido", "Apellido");
         $pdocrud->setUserSession("lastLoginTime", date("now"));
         $pdocrud->fieldRenameLable("hash_password", "Password");
+        $pdocrud->buttonHide($buttonname="cancel");
         $login = $pdocrud->dbTable("usuarios")->render("selectform");
         $data['login'] = $login;
         $this->load->helper('url');
@@ -45,6 +46,7 @@ class Login extends CI_Controller {
         $pdocrud->setUserSession("apellido", "apellido");
         $pdocrud->setUserSession("estado", "activo");
         $pdocrud->setUserSession("lastLoginTime", date("now"));
+        $pdocrud->buttonHide($buttonname="cancel");
         $pdocrud->fieldRenameLable("hash_password", "Password");
         $login = $pdocrud->dbTable("expertos")->render("selectform");
         $data['login'] = $login;
@@ -68,6 +70,7 @@ class Login extends CI_Controller {
         $pdocrud->setUserSession("estado", "activo");
         $pdocrud->setUserSession("lastLoginTime", date("now"));
         $pdocrud->fieldRenameLable("hash_password", "Password");
+        $pdocrud->buttonHide($buttonname="cancel");
         $login = $pdocrud->dbTable("tiendas")->render("selectform");
         $data['login'] = $login;
         $this->load->helper('url');
@@ -84,8 +87,13 @@ class Login extends CI_Controller {
     public function register(){
         $pdocrud = new PDOCrud();
         $pdocrud->addCallback("after_insert", "afterRegisterCallBack");
-        $pdocrud->formFieldValue("rol", "2");
-        $pdocrud->fieldDataAttr("rol", array("disabled"=>"disabled"));
+        $pdocrud->tableColFormatting("rol", "replace",array("0" =>"Nutricionista"));
+        $pdocrud->tableColFormatting("rol", "replace",array("1" =>"Coucher"));
+        $pdocrud->fieldTypes("rol", "radio");//change gender to radio button
+        $roles = array("2"=>"Nutricionista","3"=>"Coach");
+        $pdocrud->fieldDataBinding("rol", $roles, "", "","array");//add data for radio button
+//        $pdocrud->formFieldValue("rol", "2");
+//        $pdocrud->fieldDataAttr("rol", array("disabled"=>"disabled"));
         $pdocrud->formFields(array("nombre", "apellido", "email", "especialidad", "telefono", "direccion", "rol","descripcion", "paginaWeb","hash_password"));
         $pdocrud->fieldTypes("hash_password", "password", array("encryption"=>"sha1"));
         $pdocrud->formStaticFields("personalinfo", "html", "<h3>1.Solicitud de Registro de Profesional </h3><br><small>Ingrese su información. Todos los campos son requeridos</small>");//html field
@@ -95,11 +103,12 @@ class Login extends CI_Controller {
         $pdocrud->fieldDesc("Términos_y_condiciones", $link);// Add field description
         $pdocrud->checkDuplicateRecord(array("email"));
         $pdocrud->fieldTooltip("descripcion", "Por favor, ingrese su información academica y de formación. relacionada al área de salud");//tooltip
+        $pdocrud->fieldRenameLable("paginaWeb", "Pagina Web");
         $pdocrud->fieldRenameLable("hash_password", "Password");
-        $pdocrud->fieldRenameLable("paginaWeb", "Pagina Web");        
         $pdocrud->fieldNotMandatory("telefono");
         $pdocrud->fieldNotMandatory("direccion");
         $pdocrud->fieldNotMandatory("paginaWeb");
+        $pdocrud->buttonHide($buttonname="cancel");
         //$pdocrud->recaptcha("6LeW1KoUAAAAAJyRLSZF5kezshtEEjbLtqaBTjzK","6LeW1KoUAAAAAIsvauCrbfHYsNysRiVLiUrxHrYT");
         $registro = $pdocrud->dbTable("expertos")->render("insertform");
         $data['registro'] = $registro;
@@ -128,6 +137,7 @@ class Login extends CI_Controller {
         $pdocrud->fieldNotMandatory("twitter");
         $pdocrud->fieldNotMandatory("instagram");
         $pdocrud->fieldNotMandatory("rss");
+        $pdocrud->buttonHide($buttonname="cancel");
         //$pdocrud->recaptcha("6LeW1KoUAAAAAJyRLSZF5kezshtEEjbLtqaBTjzK","6LeW1KoUAAAAAIsvauCrbfHYsNysRiVLiUrxHrYT");
         $registro = $pdocrud->dbTable("tiendas")->render("insertform");
         $data['registro'] = $registro;

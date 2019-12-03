@@ -24,12 +24,12 @@ class Alimentos extends CI_Controller {
             $pdocrud->fieldRenameLable("idUsuario", "Usuario");//Rename label
             $pdocrud->relatedData("idUsuario", "usuarios", "idUsuario", "correo");
             $pdocrud->tableColFormatting("estadoAlimento", "replace",array("1" =>"Aceptado"));
-//            $action = "https://cl.openfoodfacts.net/producto/{pk}";//pk will be replaced by primary key value
-//            $text = '<i class="fa fa-external-link" aria-hidden="true"></i>';
-//            $attr = array("title"=>"Abrir en OpenFoodFacts");
-//            $pdocrud->enqueueBtnActions("url", $action, "url",$text,"estadoAlimento", $attr);
+            //$action = "https://cl.openfoodfacts.net/producto/{pk}";//pk will be replaced by primary key value
+            //text = '<i class="fa fa-external-link" aria-hidden="true"></i>';
+            //$attr = array("title"=>"Abrir en OpenFoodFacts");
+            //pdocrud->enqueueBtnActions("url", $action, "url",$text,"estadoAlimento", $attr);
             if ($rol==2) {
-//                $pdocrud->setSettings("viewbtn", false);
+                //$pdocrud->setSettings("viewbtn", false);
                 $pdocrud->setSettings("editbtn", false);
                 $pdocrud->setSettings("delbtn", false);
             }
@@ -65,7 +65,7 @@ class Alimentos extends CI_Controller {
                 $estado = $pdocrud->getUserSession("estado");
                 //Si esta activo
                 if ($estado == 1) {
-//                $pdocrud->setSettings("viewbtn", false);
+                    //$pdocrud->setSettings("viewbtn", false);
                     $pdocrud->setSettings("editbtn", false);
                     $pdocrud->setSettings("delbtn", false);
                     $pdocrud->setSettings("addbtn", false);
@@ -111,7 +111,7 @@ class Alimentos extends CI_Controller {
                 $estado = $pdocrud->getUserSession("estado");
                 //Si esta activo
                 if ($estado == 1) {
-//                $pdocrud->setSettings("viewbtn", false);
+                //$pdocrud->setSettings("viewbtn", false);
                 $pdocrud->setSettings("editbtn", false);
                 $pdocrud->setSettings("delbtn", false);
                 $rechazados = $pdocrud->dbTable("alimento_nuevo");
@@ -151,7 +151,7 @@ class Alimentos extends CI_Controller {
             $text = '<i class="fa fa-external-link" aria-hidden="true"></i>';
             $attr = array("title"=>"Abrir en OpenFoodFacts");
             $pdocrud->enqueueBtnActions("url", $action, "url",$text,"denuncia", $attr);
-            $action = "comentarios/{pk}";//pk will be replaced by primary key value
+            $action = "comentarios/1/{pk}";//pk will be replaced by primary key value
             $text = '<i class="fa fa-comments" aria-hidden="true"></i>';
             $attr = array("title"=>"Comentarios");
             $pdocrud->enqueueBtnActions("url2", $action, "url",$text,"denuncia", $attr);
@@ -165,6 +165,7 @@ class Alimentos extends CI_Controller {
             $pdocrud->colRename("idUsuario", "Usuario");
             $pdocrud->fieldRenameLable("idPeligroAlimento", "Peligro");//Rename label
             $pdocrud->crudRemoveCol(array("denuncia", "alimentoFront", "alimentoNutr", "alimentoIngr"));
+            $pdocrud->buttonHide($buttonname="cancel");
             
             //Si es nutricionista
             if ($rol==2) {
@@ -281,7 +282,6 @@ class Alimentos extends CI_Controller {
             $subTitleContent = "Administracion de Alimento";
             $level = "Alimento";
             //$pdocrud->relatedData("idUsuario", "usuarios", "idUsuario", "correo");
-            $pdocrud->setPK("idAlimentoNuevo");
             $pdocrud->where("idAlimentoNuevo", $id,"=");
             $pdocrud->FormSteps(array("idUsuario", "codigoBarras","nombreAlimento", "producto", "marca", "contenidoNeto", "ingredientes"), "Información General","tabs");
             $pdocrud->FormSteps(array("porcion","porcionGramos","energia","proteinas","grasaTotal"), "1","tabs");
@@ -292,7 +292,7 @@ class Alimentos extends CI_Controller {
             $pdocrud->setPK("idAlimentoNuevo");
             $pdocrud->setSettings("viewFormTabs", true);//set view form tabs enabled
              //$alimento = $pdocrud->dbTable("alimento_nuevo");
-            $alimento = $pdocrud->dbTable("alimento_nuevo")->render("VIEWFORM",array("id" =>$id)); 
+            $alimento = $pdocrud->dbTable("alimento_nuevo")->render("VIEWFORM",array("id" =>$id));
             $pdomodel->where("idAlimentoNuevo", $id);
             $obj =  $pdomodel->select("alimento_nuevo");
             $alimento_ind = $obj[0];
@@ -304,6 +304,39 @@ class Alimentos extends CI_Controller {
         }
     }
     
+    public function verAlimentoEdit($id) {
+        $pdocrud = $this->cabecera();
+        $pdomodel = $pdocrud->getPDOModelObj();
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("0", "2"))){
+            $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
+            $username = $pdocrud->getUserSession("userName");
+            $rol = $pdocrud->getUserSession("role");
+            $titleContent = "Alimento";
+            $subTitleContent = "Administracion de Alimento";
+            $level = "Alimento";
+            //$pdocrud->relatedData("idUsuario", "usuarios", "idUsuario", "correo");
+            $pdocrud->setPK("idAlimentoDenuncia");
+            $pdocrud->where("idAlimentoDenuncia", $id,"=");
+            $pdocrud->FormSteps(array("idUsuario", "codigoBarras","nombreAlimento", "producto", "marca", "contenidoNeto", "ingredientes"), "Información General","tabs");
+            $pdocrud->FormSteps(array("porcion","porcionGramos","energia","proteinas","grasaTotal"), "1","tabs");
+            $pdocrud->FormSteps(array("grasaSaturada","grasaMono","grasaPoli","grasaTrans","colesterol"), "2","tabs");
+            $pdocrud->FormSteps(array("hidratosCarbono","azucaresTotales","fibra","sodio"), "3","tabs");
+            $pdocrud->setSettings("viewBackButton", false);
+            $pdocrud->setSettings("viewPrintButton", false);
+            $pdocrud->setSettings("viewFormTabs", true);//set view form tabs enabled
+             //$alimento = $pdocrud->dbTable("alimento_denuncia");
+            $alimento = $pdocrud->dbTable("alimento_denuncia")->render("VIEWFORM",array("id" =>$id)); 
+            $pdomodel->where("idAlimentoDenuncia", $id);
+            $obj =  $pdomodel->select("alimento_denuncia");
+            $alimento_ind = $obj[0];
+            $data['alimentoDenuncia'] = $alimento;
+            $data['ind'] = $alimento_ind;
+            $this->template("Alimentos", $username, $nombreApellido, $titleContent, $subTitleContent, $level, "alimentoEdicion", $data, $rol);
+        }else{
+             $this->load->view('403');
+        }
+    }
+
     public function cabecera() {
         header("Access-Control-Allow-Origin: *");
         require_once "script/pdocrud.php";
@@ -339,11 +372,11 @@ class Alimentos extends CI_Controller {
             }else{
                 $this->apruebaAlimento($id, $pdocrud, $pdomodel);
             }
-//            $updateData = array("estadoAlimento"=>"3");
-//            $pdomodel = $pdocrud->getPDOModelObj();
-//            $pdomodel->where("idAlimentoNuevo", $id);
-//            $pdomodel->update("alimento_nuevo", $updateData);
-//            redirect('/Alimentos/pendientes/');
+        //$updateData = array("estadoAlimento"=>"3");
+        //$pdomodel = $pdocrud->getPDOModelObj();
+        //$pdomodel->where("idAlimentoNuevo", $id);
+        //$pdomodel->update("alimento_nuevo", $updateData);
+        //redirect('/Alimentos/pendientes/');
         }else{
             $this->load->view('403');
         }
@@ -419,6 +452,105 @@ class Alimentos extends CI_Controller {
             echo 'no guardado';
         }
     }
+
+    public function aprobarEdicion($id){
+        $pdocrud = $this->cabecera();
+        $pdomodel = $pdocrud->getPDOModelObj();
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("0","2"))){
+            $rol = $pdocrud->getUserSession("role");
+            if ($rol==2) {
+                $estado = $pdocrud->getUserSession("estado");
+                //Si esta activo
+                if ($estado == 1) {
+                    $this->apruebaAlimentoEdicion($id, $pdocrud, $pdomodel);
+                //Si esta inactivo se muestra pantalla de permiso
+                }else{
+                    $this->load->view('estado');
+                }
+            //Si es administrador
+            }else{
+                $this->apruebaAlimentoEdicion($id, $pdocrud, $pdomodel);
+            }
+        //$updateData = array("estadoAlimento"=>"3");
+        //$pdomodel = $pdocrud->getPDOModelObj();
+        //$pdomodel->where("idAlimentoNuevo", $id);
+        //$pdomodel->update("alimento_nuevo", $updateData);
+        //redirect('/Alimentos/pendientes/');
+        }else{
+            $this->load->view('403');
+        }
+        //redirect('/Alimentos/pendientes/');
+    }
+    
+    public function apruebaAlimentoEdicion($id, $pdocrud, $pdomodel){
+        $pdomodel->where("idAlimentoDenuncia", $id);
+        $obj =  $pdomodel->select("alimento_denuncia");
+        $ind = $obj[0];
+        $data_array =  array(
+                "user_id"                           => "eyesfood",
+                "password"                          => "eyesfood2019",
+                "lang"                              => "es",
+                "code"                              => $ind["codigoBarras"],
+                "product_name"                      => $ind["nombreAlimento"],
+                "categories"                        => $ind["producto"],
+                "brands"                            => $ind["marca"],
+                "quantity"                          => $ind["contenidoNeto"],
+                "nutrition_data_per"                => "100g",
+                "serving_size"                      => $ind["porcion"],
+                "nutriment_energy"                  => $ind["energia"],
+                "nutriment_proteins"                => $ind["proteinas"],
+                "nutriment_fat"                     => $ind["grasaTotal"],
+                "nutriment_saturated-fat"           => $ind["grasaSaturada"],
+                "nutriment_monounsaturated-fat"     => $ind["grasaMono"],
+                "nutriment_polyunsaturated-fat"     => $ind["grasaPoli"],
+                "nutriment_trans-fat"               => $ind["grasaTrans"],
+                "nutriment_cholesterol"             => $ind["colesterol"],
+                "nutriment_carbohydrates"           => $ind["hidratosCarbono"],
+                "nutriment_sugars"                  => $ind["azucaresTotales"],
+                "nutriment_fiber"                   => $ind["fibra"],
+                "nutriment_sodium"                  => $ind["sodio"],
+                "ingredients_text"                  => $ind["ingredientes"],
+          );
+        //echo http_build_query($data_array) . "\n";
+        $make_call = $this->callAPI("GET", $this->urlPost, $data_array);
+        $response = json_decode($make_call, true);
+        if ($response['status']=="1"){
+            //echo 'guardado';
+            $updateData = array("estadoAlimento"=>"1");
+            $pdomodel = $pdocrud->getPDOModelObj();
+            $pdomodel->where("idAlimentoDenuncia", $id);
+            $pdomodel->update("alimento_denuncia", $updateData);
+            //Insertar en Alimentos
+            $rol = $pdocrud->getUserSession("role");
+            if ($rol==2) {
+                $insertData = array("codigoBarras" => $ind["codigoBarras"], "idUsuario" => $ind["idUsuario"], "nombreAlimento" => $ind["nombreAlimento"]." - ".$ind["marca"]." - ".$ind["contenidoNeto"], "idExperto" => $pdocrud->getUserSession("userId"));
+                $pdocrud->getPDOModelObj()->where("codigoBarras", $ind["codigoBarras"])->update("alimentos", $insertData);
+            //Si es administrador
+            }else{
+                $insertData = array("codigoBarras" => $ind["codigoBarras"], "idUsuario" => $ind["idUsuario"], "nombreAlimento" => $ind["nombreAlimento"]." - ".$ind["marca"]." - ".$ind["contenidoNeto"]);
+                $pdocrud->getPDOModelObj()->where("codigoBarras", $ind["codigoBarras"])->update("alimentos", $insertData);
+            }
+            if (isset($ind['idTienda']) and $ind['idTienda']!="") {
+                $insertData3 = array("codigoBarras" => $ind["codigoBarras"], "idTienda" => $ind["idTienda"]);
+                $pdocrud->getPDOModelObj()->where("codigoBarras", $ind["codigoBarras"])->update("alimentos", $insertData3);
+                $pdomodel->where("idTienda", $ind['idTienda']);
+                $obj =  $pdomodel->select("tiendas");
+                //$this->notificar($obj['email'], $ind);
+                
+            }
+            if (isset($ind['idUsuario'])and $ind['idUsuario']!="") {
+                $insertData2 = array("codigoBarras" => $ind["codigoBarras"], "idUsuario" => $ind["idUsuario"]);
+                $pdocrud->getPDOModelObj()->where("codigoBarras", $ind["codigoBarras"])->update("alimentos", $insertData2);
+                $pdomodel->where("idUsuario", $ind['idUsuario']);
+                $obj =  $pdomodel->select("usuarios");
+                //$this->notificar($obj['Correo'], $ind);
+            }
+            //$this->images($ind["codigoBarras"]);
+            redirect('/Alimentos/pendientesEdit/');
+        }else{
+            echo 'no guardado';
+        }
+    }
     
     public function notificar($correo, $alimento) {
         if (isset($correo)){
@@ -450,8 +582,99 @@ class Alimentos extends CI_Controller {
             mail($destinatario,$asunto,$cuerpo,$headers);
         }
     }
+
+    public function notificarEdicion($correo, $alimento) {
+        if (isset($correo)){
+            $destinatario = $correo;
+            $asunto = "Solicitud de Edicion Alimento";
+            $cuerpo = ' 
+                <html> 
+                <head> 
+                   <title>Edicion de Alimento</title> 
+                </head> 
+                <body> 
+                <h1>Hola!</h1> 
+                <p> 
+                <b>Su solicitud de edicion de alimento ha sido aceptada</b>.</p> <p>A continuacion estan los datos del alimento que solicito subir a la plataforma.</p>  
+                <p>Codigo de Barras: '.$alimento['codigoBarras'].'</p>
+                <p>Nombre: '.$alimento['nombreAlimento'].'</p>
+                <p>Marca: '.$alimento['marca'].'</p>
+                <p>Categoria: '.$alimento['producto'].'</p>
+                <p></p>
+                 <b>Gracias por utilizar EyesFood</b>
+                </body> 
+                </html> 
+                ';
+            $headers = "MIME-Version: 1.0\r\n"; 
+            $headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
+
+            //dirección del remitente 
+            $headers .= "From: EyesFood <eyesfood@correo.com>\r\n";
+            mail($destinatario,$asunto,$cuerpo,$headers);
+        }
+    }
+
+    public function notificarRechazo($correo, $alimento, $comentario) {
+        if (isset($correo)){
+            $destinatario = $correo;
+            $asunto = "Solicitud de Alimento Nuevo";
+            $cuerpo = ' 
+                <html> 
+                <head> 
+                   <title>Nuevo Alimento</title> 
+                </head> 
+                <body> 
+                <h1>Hola!</h1> 
+                <p> 
+                <b>Su solicitud de edicion de alimento ha sido rechazada.</b>.</p> 
+                <p>Codigo de Barras: '.$alimento['codigoBarras'].'</p>
+                <p>Nombre: '.$alimento['nombreAlimento'].'</p>
+                <p>Motivo: '.$comentario['comentario'].'</p>  
+                <p></p>
+                 <b>Gracias por utilizar EyesFood</b>
+                </body> 
+                </html> 
+                ';
+            $headers = "MIME-Version: 1.0\r\n"; 
+            $headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
+
+            //dirección del remitente 
+            $headers .= "From: EyesFood <eyesfood@correo.com>\r\n";
+            mail($destinatario,$asunto,$cuerpo,$headers);
+        }
+    }
+
+    public function notificarRechazoEdicion($correo, $alimento, $comentario) {
+        if (isset($correo)){
+            $destinatario = $correo;
+            $asunto = "Solicitud de Edicion Alimento";
+            $cuerpo = ' 
+                <html> 
+                <head> 
+                   <title>Rechazo de edicion de Alimento</title> 
+                </head> 
+                <body> 
+                <h1>Hola!</h1> 
+                <p> 
+                <b>Su solicitud de edicion de alimento ha sido rechazada.</b>.</p> 
+                <p>Codigo de Barras: '.$alimento['codigoBarras'].'</p>
+                <p>Nombre: '.$alimento['nombreAlimento'].'</p>
+                <p>Motivo: '.$comentario['comentario'].'</p>  
+                <p></p>
+                 <b>Gracias por utilizar EyesFood</b>
+                </body> 
+                </html> 
+                ';
+            $headers = "MIME-Version: 1.0\r\n"; 
+            $headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
+
+            //dirección del remitente 
+            $headers .= "From: EyesFood <eyesfood@correo.com>\r\n";
+            mail($destinatario,$asunto,$cuerpo,$headers);
+        }
+    }
     
-    public function rechazar($id){
+    public function rechazar($id, $comentario){
         $pdocrud = $this->cabecera();
         if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("0", "2"))){
             $rol = $pdocrud->getUserSession("role");
@@ -463,6 +686,9 @@ class Alimentos extends CI_Controller {
                     $pdomodel = $pdocrud->getPDOModelObj();
                     $pdomodel->where("idAlimentoNuevo", $id);
                     $pdomodel->update("alimento_nuevo", $updateData);
+                    $comentario = str_replace("%20"," ",$comentario);
+                    $insertData = array("idColaborador" => $rol,"colaborador" => $pdocrud->getUserSession("userId"), "idContexto" => "3", "referencia" => $id, "comentario" => $comentario);
+                    $pdocrud->getPDOModelObj()->insert("comentario", $insertData);
                     redirect('/Alimentos/pendientes/');
                 //Si esta inactivo se muestra pantalla de permiso
                 }else{
@@ -474,6 +700,9 @@ class Alimentos extends CI_Controller {
                 $pdomodel = $pdocrud->getPDOModelObj();
                 $pdomodel->where("idAlimentoNuevo", $id);
                 $pdomodel->update("alimento_nuevo", $updateData);
+                $comentario = str_replace("%20"," ",$comentario);
+                $insertData = array("idColaborador" => $rol,"colaborador" => $pdocrud->getUserSession("userId"), "idContexto" => "3", "referencia" => $id, "comentario" => $comentario);
+                $pdocrud->getPDOModelObj()->insert("comentario", $insertData);
                 redirect('/Alimentos/pendientes/');
             }
         }else{
@@ -514,7 +743,6 @@ class Alimentos extends CI_Controller {
         if(!$result){die("Connection Failure");}
         curl_close($curl);
         return $result;
-   
     }
     
     private function UR_exists($url){
@@ -812,7 +1040,6 @@ class Alimentos extends CI_Controller {
         redirect('/Alimentos/verAlimentoImagenesApr/'.$alimento_ind["codigoBarras"]);
     }
 
-
     public function verAlimentoImagenesApr($codigo) {
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
@@ -845,9 +1072,9 @@ class Alimentos extends CI_Controller {
             $obj =  $pdomodel->select("alimentos");
             $alimento_ind = $obj[0];
             
-//            $data['alimento'] = $alimento;
-//            $data['alimento2'] = $alimento2;
-//            $data['alimento3'] = $alimento3;
+            //$data['alimento'] = $alimento;
+            //$data['alimento2'] = $alimento2;
+            //$data['alimento3'] = $alimento3;
             $data['ind'] = $alimento_ind;
             $data['resp'] = $resp;
             $data['prod'] = $product;
@@ -890,7 +1117,7 @@ class Alimentos extends CI_Controller {
         }
     }
     
-    public function comentarios($codigo) {
+    public function comentarios($contexto, $codigo) {
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
         if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("0", "2"))){
@@ -905,7 +1132,7 @@ class Alimentos extends CI_Controller {
             curl_setopt_array($curl, [
                 CURLOPT_RETURNTRANSFER => 1,
                 CURLOPT_URL => $this->
-                    urlApiComments."comments/".$codigo,
+                    urlApiComments."comments/".$contexto."/".$codigo ,
                 CURLOPT_USERAGENT => 'EyesFood'
             ]);
             // Send the request & save response to $resp
@@ -922,12 +1149,12 @@ class Alimentos extends CI_Controller {
             for($i = 0, $size = count($comentarios); $i < $size; ++$i) {
                 $usuario = $this->correo($comentarios[$i]['idUsuario']);
                 array_push($comentarios[$i], $usuario['Correo']);
-//                    $people[$i]['salt'] = mt_rand(000000, 999999);
+            //$people[$i]['salt'] = mt_rand(000000, 999999);
             }
             // Close request to clear up some resources
             curl_close($curl);
             $pdocrud->setPK("codigoBarras");
-            $pdocrud->where("codigoBarras", $codigo,"=");
+            $pdocrud->where("referencia", $codigo,"=");
             $pdocrud->setViewColumns(array("codigoBarras", "nombreAlimento","idUsuario","fechaSubida", "denuncia"));
             $pdocrud->setSettings("viewBackButton", false);
             $pdocrud->setSettings("viewPrintButton", false);
@@ -936,7 +1163,7 @@ class Alimentos extends CI_Controller {
             $data['response'] = $response['product']['image_front_url'];
             $data['alimento'] = $alimento;
             $data['codigo'] = $codigo;
-            $this->template("Alimentos", $username, $nombreApellido, $titleContent, $subTitleContent, $level, "comentarios", $data, $rol);
+            $this->template("Alimentos", $username, $nombreApellido, $titleContent, $subTitleContent, $level, "comentarios", $data, $rol, $contexto);
         }else{
              $this->load->view('403');
         }
@@ -960,25 +1187,27 @@ class Alimentos extends CI_Controller {
         echo $codigo;
     }
     
-    public function comentar($codigo, $comentario){
+    public function comentar($contexto ,$codigo, $comentario){
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
         if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("0","2"))){
+            echo $contexto;
             echo $codigo;
             echo $comentario;
             echo $pdocrud->getUserSession("userId");
             $data_array =  array(
-                    "idUsuario"        => $pdocrud->getUserSession("userId"),
+                    "idColaborador"        => $pdocrud->getUserSession("role"),
+                    "colaborador"        => $pdocrud->getUserSession("userId"),
                     "comentario"        => urldecode ( $comentario ),
               );
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_POST, 1);
             curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data_array));
-            curl_setopt($curl, CURLOPT_URL, $this->urlApiComments.'comments/'.$codigo);
+            curl_setopt($curl, CURLOPT_URL, $this->urlApiComments.'comments/'.$contexto.'/'.$codigo);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             $result = curl_exec($curl);
             curl_close($curl);
-            redirect('/Alimentos/comentarios/'.$codigo);
+            redirect('/Alimentos/comentarios/'.$contexto.'/'.$codigo);
         }else{
             $this->load->view('403');
         }
@@ -1041,15 +1270,16 @@ class Alimentos extends CI_Controller {
             $pdocrud->relatedData("idUsuario", "usuarios", "idUsuario", "correo");
             $pdocrud->tableColFormatting("estadoAlimento", "replace",array("2" =>"Pendiente"));
             $pdocrud->setSettings("viewbtn", false);
-            $action = base_url()."Alimentos/verAlimento/{idAlimentoNuevo}";//pk will be replaced by primary key value
+            $action = base_url()."Alimentos/verAlimentoEdit/{idAlimentoNuevo}";//pk will be replaced by primary key value
             $text = '<i class="fa fa-eye" aria-hidden="true"></i>';
             $attr = array("title"=>"Ver");
+            $pdocrud->buttonHide($buttonname="cancel");
             $pdocrud->enqueueBtnActions("url", $action, "url",$text,"estadoAlimento", $attr);
             if ($rol==2) {
                 $estado = $pdocrud->getUserSession("estado");
                 //Si esta activo
                 if ($estado == 1) {
-//                $pdocrud->setSettings("viewbtn", false);
+                    //$pdocrud->setSettings("viewbtn", false);
                     $pdocrud->setSettings("editbtn", false);
                     $pdocrud->setSettings("delbtn", false);
                     $pdocrud->setSettings("addbtn", false);
@@ -1070,6 +1300,42 @@ class Alimentos extends CI_Controller {
             }
         }else{
              $this->load->view('403');
+        }
+    }
+
+    public function rechazarEdicion($id, $comentario){
+        $pdocrud = $this->cabecera();
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("0", "2"))){
+            $rol = $pdocrud->getUserSession("role");
+            if ($rol==2) {
+                $estado = $pdocrud->getUserSession("estado");
+                //Si esta activo
+                if ($estado == 1) {
+                    $updateData = array("estadoAlimento"=>"3");
+                    $pdomodel = $pdocrud->getPDOModelObj();
+                    $pdomodel->where("idAlimentoDenuncia", $id);
+                    $pdomodel->update("alimento_denuncia", $updateData);
+                    $comentario = str_replace("%20"," ",$comentario);
+                    $insertData = array("idColaborador" => $rol,"colaborador" => $pdocrud->getUserSession("userId"), "idContexto" => "4", "referencia" => $id, "comentario" => $comentario);
+                    $pdocrud->getPDOModelObj()->insert("comentario", $insertData);
+                    redirect('/Alimentos/pendientesEdit/');
+                //Si esta inactivo se muestra pantalla de permiso
+                }else{
+                    $this->load->view('estado');
+                }
+            //Si es administrador
+            }else{
+                $updateData = array("estadoAlimento"=>"3");
+                $pdomodel = $pdocrud->getPDOModelObj();
+                $pdomodel->where("idAlimentoDenuncia", $id);
+                $pdomodel->update("alimento_denuncia", $updateData);
+                $comentario = str_replace("%20"," ",$comentario);            
+                $insertData = array("idColaborador" => $rol,"colaborador" => $pdocrud->getUserSession("userId"), "idContexto" => "4", "referencia" => $id, "comentario" => $comentario);
+                    $pdocrud->getPDOModelObj()->insert("comentario", $insertData);
+                redirect('/Alimentos/pendientesEdit/');
+            }
+        }else{
+            $this->load->view('403');
         }
     }
 }

@@ -28,6 +28,7 @@ class Tiendas extends CI_Controller {
                 $experto = $pdocrud->dbTable("tiendas")->render("VIEWFORM",array("id" =>$pdocrud->getUserSession("userId")));
                 $data['experto'] = $experto;
                 $data['aux'] = 0;
+                $pdocrud->buttonHide($buttonname="cancel");
                 $this->template("Tiendas", $username, $nombreApellido, $titleContent, $subTitleContent, $level, "perfil", $data, $rol);
             //Si esta inactivo se muestra pantalla de permiso
             }else{

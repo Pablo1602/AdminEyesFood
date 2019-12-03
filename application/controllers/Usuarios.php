@@ -24,6 +24,7 @@ class Usuarios extends CI_Controller {
             $pdocrud->tableColFormatting("rol", "replace",array("1" =>"Paciente"));
             $pdocrud->formFields(array("Nombre","Apellido","Correo", "hash_password", "Sexo", "rol"));
             $pdocrud->editFormFields(array("Nombre","Apellido", "Correo", "Sexo", "rol"));
+            $pdocrud->buttonHide($buttonname="cancel");
             $usuarios = $pdocrud->dbTable("usuarios");
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");

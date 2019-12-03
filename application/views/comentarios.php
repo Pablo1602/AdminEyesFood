@@ -139,7 +139,7 @@ input[type=text]{
             return false;
         }else{
             $("#valueFromMyModal").val($("#myform input[type=text]").val().trim());
-            window.location.href = "<?php echo base_url().'Alimentos/comentar/'.$codigo.'/'?>"+$("#name").val().trim();
+            window.location.href = "<?php echo base_url().'Alimentos/comentar/1/'.$codigo.'/'?>"+$("#name").val().trim();
         }
     });
     $("#btnNo").click(function() {
