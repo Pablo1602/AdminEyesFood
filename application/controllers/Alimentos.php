@@ -4,8 +4,8 @@ class Alimentos extends CI_Controller {
     public $urlPost = 'https://world.openfoodfacts.org/cgi/product_jqm2.pl';
     public $urlGet = 'https://world.openfoodfacts.org/api/v0/product/';
     public $urlImagePost = 'https://world.openfoodfacts.org/cgi/product_image_upload.pl';
-    public $urlImageRemote = 'https://eyesfoodweb.herokuapp.com/api.eyesfood.cl/v1/img/uploads/';
-    public $urlApiComments = 'https://eyesfoodweb.herokuapp.com/api.eyesfood.comments.cl/v1/';
+    public $urlImageRemote = 'https://eyesfoodapi.herokuapp.com/api.eyesfood.cl/v1/img/uploads/';
+    public $urlApiComments = 'https://eyesfoodapi.herokuapp.com/api.eyesfood.comments.cl/v1/';
     //public $base_dir = __DIR__."/temps/";
     public function __construct() {
         parent::__construct();
