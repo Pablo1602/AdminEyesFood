@@ -15,9 +15,9 @@ global $config;
 $config["script_url"] = "https://eyesfoodweb.herokuapp.com/AdminEyesFood/";
 /************************ database ************************/
 //Set the host name to connect for database
-$config["hostname"] =  "heroku_381c12ffe1e1d28";
+$config["hostname"] =  "us-cdbr-iron-east-05.cleardb.net";
 //Set the database name
-$config["database"] = "us-cdbr-iron-east-05.cleardb.net";
+$config["database"] = "heroku_381c12ffe1e1d28";
 //Set the username for database access
 $config["username"] = "bf2ad6a2d8956c";
 //Set the pwd for the database user
