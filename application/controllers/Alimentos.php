@@ -45,7 +45,7 @@ class Alimentos extends CI_Controller {
     public function pendientes(){
         $pdocrud = $this->cabecera();
         if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("0", "2"))){
-            $pdocrud->crudTableCol(array("idUsuario","codigoBarras", "nombreAlimento", "producto", "marca", "contenidoNeto", "ingredientes"));
+            $pdocrud->crudTableCol(array("idUsuario","codigoBarras", "nombreAlimento", "producto", "marca", "contenidoNeto", "ingredientes", "alergenos", "trazas"));
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
             $rol = $pdocrud->getUserSession("role");
@@ -283,7 +283,7 @@ class Alimentos extends CI_Controller {
             $level = "Alimento";
             //$pdocrud->relatedData("idUsuario", "usuarios", "idUsuario", "correo");
             $pdocrud->where("idAlimentoNuevo", $id,"=");
-            $pdocrud->FormSteps(array("idUsuario", "codigoBarras","nombreAlimento", "producto", "marca", "contenidoNeto", "ingredientes"), "Información General","tabs");
+            $pdocrud->FormSteps(array("idUsuario", "codigoBarras","nombreAlimento", "producto", "marca", "contenidoNeto", "ingredientes", "alergenos", "trazas"), "Información General","tabs");
             $pdocrud->FormSteps(array("porcion","porcionGramos","energia","proteinas","grasaTotal"), "1","tabs");
             $pdocrud->FormSteps(array("grasaSaturada","grasaMono","grasaPoli","grasaTrans","colesterol"), "2","tabs");
             $pdocrud->FormSteps(array("hidratosCarbono","azucaresTotales","fibra","sodio"), "3","tabs");
@@ -317,7 +317,7 @@ class Alimentos extends CI_Controller {
             //$pdocrud->relatedData("idUsuario", "usuarios", "idUsuario", "correo");
             $pdocrud->setPK("idAlimentoDenuncia");
             $pdocrud->where("idAlimentoDenuncia", $id,"=");
-            $pdocrud->FormSteps(array("idUsuario", "codigoBarras","nombreAlimento", "producto", "marca", "contenidoNeto", "ingredientes"), "Información General","tabs");
+            $pdocrud->FormSteps(array("idUsuario", "codigoBarras","nombreAlimento", "producto", "marca", "contenidoNeto", "ingredientes", "alergenos", "trazas"), "Información General","tabs");
             $pdocrud->FormSteps(array("porcion","porcionGramos","energia","proteinas","grasaTotal"), "1","tabs");
             $pdocrud->FormSteps(array("grasaSaturada","grasaMono","grasaPoli","grasaTrans","colesterol"), "2","tabs");
             $pdocrud->FormSteps(array("hidratosCarbono","azucaresTotales","fibra","sodio"), "3","tabs");
@@ -411,6 +411,8 @@ class Alimentos extends CI_Controller {
                 "nutriment_fiber"                   => $ind["fibra"],
                 "nutriment_sodium"                  => $ind["sodio"],
                 "ingredients_text"                  => $ind["ingredientes"],
+                "allergens_from_user"               => $ind["alergenos"],
+                "traces_from_user"                  => $ind["trazas"],
           );
         //echo http_build_query($data_array) . "\n";
         $make_call = $this->callAPI("GET", $this->urlPost, $data_array);
@@ -510,6 +512,8 @@ class Alimentos extends CI_Controller {
                 "nutriment_fiber"                   => $ind["fibra"],
                 "nutriment_sodium"                  => $ind["sodio"],
                 "ingredients_text"                  => $ind["ingredientes"],
+                "allergens_from_user"               => $ind["alergenos"],
+                "traces_from_user"                  => $ind["traces"],
           );
         //echo http_build_query($data_array) . "\n";
         $make_call = $this->callAPI("GET", $this->urlPost, $data_array);
@@ -687,8 +691,8 @@ class Alimentos extends CI_Controller {
                     $pdomodel->where("idAlimentoNuevo", $id);
                     $pdomodel->update("alimento_nuevo", $updateData);
                     $comentario = str_replace("%20"," ",$comentario);
-                    $insertData = array("idColaborador" => $rol,"colaborador" => $pdocrud->getUserSession("userId"), "idContexto" => "3", "referencia" => $id, "comentario" => $comentario);
-                    $pdocrud->getPDOModelObj()->insert("comentario", $insertData);
+                    $insertData = array("idColaborador" => $rol,"colaborador" => $pdocrud->getUserSession("userId"), "idContextos" => "3", "referencia" => $id, "comentario" => $comentario);
+                    $pdocrud->getPDOModelObj()->insert("comentarios", $insertData);
                     redirect('/Alimentos/pendientes/');
                 //Si esta inactivo se muestra pantalla de permiso
                 }else{
@@ -701,8 +705,8 @@ class Alimentos extends CI_Controller {
                 $pdomodel->where("idAlimentoNuevo", $id);
                 $pdomodel->update("alimento_nuevo", $updateData);
                 $comentario = str_replace("%20"," ",$comentario);
-                $insertData = array("idColaborador" => $rol,"colaborador" => $pdocrud->getUserSession("userId"), "idContexto" => "3", "referencia" => $id, "comentario" => $comentario);
-                $pdocrud->getPDOModelObj()->insert("comentario", $insertData);
+                $insertData = array("idColaborador" => "1", "colaborador" => $pdocrud->getUserSession("userId"), "idContextos" => "3", "referencia" => $id, "comentario" => $comentario);
+                $pdocrud->getPDOModelObj()->insert("comentarios", $insertData);
                 redirect('/Alimentos/pendientes/');
             }
         }else{
@@ -767,7 +771,7 @@ class Alimentos extends CI_Controller {
             //$alimento = $pdocrud->dbTable("alimento_nuevo");
             $pdocrud->setViewColumns(array("nombreAlimento", "contenidoNeto", "marca", "producto"));
             $alimento = $pdocrud->dbTable("alimento_nuevo")->render("VIEWFORM",array("id" =>$id)); 
-            $pdocrud->setViewColumns(array("ingredientes"));
+            $pdocrud->setViewColumns(array("ingredientes", "alergenos", "trazas"));
             $alimento2 = $pdocrud->dbTable("alimento_nuevo")->render("VIEWFORM",array("id" =>$id));
             $pdocrud = new PDOCrud();
             $pdocrud->FormSteps(array("porcion","porcionGramos","energia","proteinas","grasaTotal"), "1","tabs");
@@ -1137,6 +1141,7 @@ class Alimentos extends CI_Controller {
             ]);
             // Send the request & save response to $resp
             $resp = curl_exec($curl);
+            $comentarios = json_decode($resp, true);
             curl_setopt_array($curl, [
                 CURLOPT_RETURNTRANSFER => 1,
                 CURLOPT_URL => $this->
@@ -1145,7 +1150,6 @@ class Alimentos extends CI_Controller {
             ]);
             $resp2 = curl_exec($curl);
             $response = json_decode($resp2, true);
-            $comentarios = json_decode($resp, true);
             for($i = 0, $size = count($comentarios); $i < $size; ++$i) {
                 $usuario = $this->correo($comentarios[$i]['colaborador']);
                 array_push($comentarios[$i], $usuario['Correo']);
@@ -1258,7 +1262,7 @@ class Alimentos extends CI_Controller {
     public function pendientesEdit(){
         $pdocrud = $this->cabecera();
         if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("0", "2"))){
-            $pdocrud->crudTableCol(array("idUsuario","codigoBarras", "nombreAlimento", "producto", "marca", "contenidoNeto", "ingredientes"));
+            $pdocrud->crudTableCol(array("idUsuario","codigoBarras", "nombreAlimento", "producto", "marca", "contenidoNeto", "ingredientes", "alergenos", "trazas"));
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
             $rol = $pdocrud->getUserSession("role");
@@ -1316,8 +1320,8 @@ class Alimentos extends CI_Controller {
                     $pdomodel->where("idAlimentoDenuncia", $id);
                     $pdomodel->update("alimento_denuncia", $updateData);
                     $comentario = str_replace("%20"," ",$comentario);
-                    $insertData = array("idColaborador" => $rol,"colaborador" => $pdocrud->getUserSession("userId"), "idContexto" => "4", "referencia" => $id, "comentario" => $comentario);
-                    $pdocrud->getPDOModelObj()->insert("comentario", $insertData);
+                    $insertData = array("idColaborador" => $rol,"colaborador" => $pdocrud->getUserSession("userId"), "idContextos" => "4", "referencia" => $id, "comentario" => $comentario);
+                    $pdocrud->getPDOModelObj()->insert("comentarios", $insertData);
                     redirect('/Alimentos/pendientesEdit/');
                 //Si esta inactivo se muestra pantalla de permiso
                 }else{
@@ -1330,8 +1334,8 @@ class Alimentos extends CI_Controller {
                 $pdomodel->where("idAlimentoDenuncia", $id);
                 $pdomodel->update("alimento_denuncia", $updateData);
                 $comentario = str_replace("%20"," ",$comentario);            
-                $insertData = array("idColaborador" => $rol,"colaborador" => $pdocrud->getUserSession("userId"), "idContexto" => "4", "referencia" => $id, "comentario" => $comentario);
-                    $pdocrud->getPDOModelObj()->insert("comentario", $insertData);
+                $insertData = array("idColaborador" => "1","colaborador" => $pdocrud->getUserSession("userId"), "idContextos" => "4", "referencia" => $id, "comentario" => $comentario);
+                    $pdocrud->getPDOModelObj()->insert("comentarios", $insertData);
                 redirect('/Alimentos/pendientesEdit/');
             }
         }else{

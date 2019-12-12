@@ -77,7 +77,7 @@ class Alimento_tienda extends CI_Controller {
     public function pendientes() {
         $pdocrud = $this->cabecera();
         if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("4"))){
-            $pdocrud->crudTableCol(array("codigoBarras", "nombreAlimento", "producto", "marca", "contenidoNeto", "ingredientes"));
+            $pdocrud->crudTableCol(array("codigoBarras", "nombreAlimento", "producto", "marca", "contenidoNeto", "ingredientes", "alergenos", "trazas"));
             $nombreApellido = $pdocrud->getUserSession("nombre");
             $username = $pdocrud->getUserSession("userName");
             $rol = $pdocrud->getUserSession("role");
