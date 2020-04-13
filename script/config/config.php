@@ -12,7 +12,7 @@
 /* Configuaration Settings */
 global $config;
 //script url - Enter complete url inside which script folder is placed. Please note that it doesn't include the script folder
-$config["script_url"] = "https://admineyesfood.herokuapp.com/";
+$config["script_url"] = "https://eyesfoodweb.herokuapp.com/";
 /************************ database ************************/
 //Set the host name to connect for database
 $config["hostname"] =  "us-cdbr-iron-east-01.cleardb.net";
