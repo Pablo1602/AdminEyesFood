@@ -15,13 +15,13 @@ global $config;
 $config["script_url"] = "https://eyesfoodweb.herokuapp.com/";
 /************************ database ************************/
 //Set the host name to connect for database
-$config["hostname"] =  "us-cdbr-iron-east-01.cleardb.net";
+$config["hostname"] =  "ijj1btjwrd3b7932.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
 //Set the database name
-$config["database"] = "heroku_76d0cfc7f4b4712";
+$config["database"] = "ggq3c9ex9p6sdmu7";
 //Set the username for database access
-$config["username"] = "b94c2f641ae6b0";
+$config["username"] = "r2f05o3tnzqmmmhw";
 //Set the pwd for the database user
-$config["password"] = "b2fd6eb4";
+$config["password"] = "w134r207xtd4xv8n";
 //Set the database type to be used. Available values are "mysql", "pgsql", "sqlite" and "sqlserver".
 $config["dbtype"] = "mysql";
 //Please enter purchase code. Please check how to find purchase code details here https://help.market.envato.com/hc/en-us/articles/202822600-Where-Is-My-Purchase-Code-
