@@ -30,8 +30,8 @@ echo $alimento;
         <h4 class="modal-title" id="myModalLabel">Rechazar</h4>
         Esta seguro de rechazar el alimento <?php echo ($ind["idAlimentoNuevo"]); ?> ?
       </div>
-      <h5>Comentario de rechazo</h5>
-      <input type="text" style="resize:none" rows="5" id="texto">
+      <h5 class="modal-header">Comentario de rechazo</h5>
+      <textarea type="text" style="resize:none; margin-left:10px;" rows="8" cols="30" id="texto"></textarea>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" id="modal-btn-2-si">Si</button>
         <button type="button" class="btn btn-primary" id="modal-btn-2-no">No</button>

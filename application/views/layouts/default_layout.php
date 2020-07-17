@@ -72,10 +72,10 @@
                     <ul class="sidebar-menu">
                       <li class="header">MENU</li>
                       <!-- Optionally, you can add icons to the links -->
-                      <li class="" <?php if ($rol != 0){ echo 'style="display:none;"'; } ?>>
+                      <li class="" <?php if ($rol != 1){ echo 'style="display:none;"'; } ?>>
                             <a href="<?php echo base_url();?>Usuarios"><i class="fa fa-users"></i> <span>Usuarios</span></a>
                         </li>
-                      <li class="" <?php if ($rol != 0){ echo 'style="display:none;"'; } ?>>
+                      <li class="" <?php if ($rol != 1){ echo 'style="display:none;"'; } ?>>
                             <a href="<?php echo base_url();?>Notificaciones"><i class="fa fa-bullhorn"></i> <span>Notificaciones</span></a>
                         </li>
                         <li class="treeview" <?php if ($rol ==3 or $rol ==4){ echo 'style="display:none;"'; } ?>>
@@ -94,7 +94,7 @@
                                     </span>
                                   </a>
                                   <ul class="treeview-menu">
-                                    <!--<li><a href="<?php echo base_url();?>Alimentos/aceptados"><i class="fa fa-check"></i> Aceptados</a></li>-->
+                                    <li><a href="<?php echo base_url();?>Alimentos/aceptados"><i class="fa fa-check"></i> Aceptados</a></li>
                                     <li><a href="<?php echo base_url();?>Alimentos/pendientes"><i class="fa fa-hourglass-start"></i> Pendientes</a></li>
                                     <li><a href="<?php echo base_url();?>Alimentos/rechazados"><i class="fa fa-times"></i> Rechazados</a></li>
                                   </ul>
@@ -104,21 +104,22 @@
                                     </span>
                                   </a>
                                   <ul class="treeview-menu">
-                                    <li><a href="#"><i class="fa fa-check"></i> Aceptados</a></li>
+                                    <li><a href="<?php echo base_url();?>Alimentos/aceptadosEdit"><i class="fa fa-check"></i> Aceptados</a></li>
                                     <li><a href="<?php echo base_url();?>Alimentos/pendientesEdit"><i class="fa fa-hourglass-start"></i> Pendientes</a></li>
-                                    <li><a href="#"><i class="fa fa-times"></i> Rechazados</a></li>
+                                    <li><a href="<?php echo base_url();?>Alimentos/rechazadosEdit"><i class="fa fa-times"></i> Rechazados</a></li>
                                   </ul>
                                 </li>
                                 <li><a href="<?php echo base_url();?>Alimentos/imagenes"><i class="fa fa-image"></i> <span>Imagenes</span></a></li>
                                 <li><a href="<?php echo base_url();?>Recomendaciones/index"><i class="fa fa-medkit"></i> <span>Recomendaciones</span></a></li>
-                                <li><a href="<?php echo base_url();?>Peligros/index"><i class="fa fa-exclamation-triangle"></i> <span>Peligros</span></a></li>
+                                <!--<li><a href="<?php echo base_url();?>Peligros/index"><i class="fa fa-exclamation-triangle"></i> <span>Peligros</span></a></li>-->
                             </ul>
                         </li>
                         <li class="" <?php if ($rol != 3 and $rol!=2){ echo 'style="display:none;"'; } ?>>
                             <a href="<?php echo base_url();?>Consultas"><i class="fa fa-file"></i> <span>Consultas</span></a>
                         </li>
-                        <li <?php if ($rol != 0){ echo 'style="display:none;"'; } ?>><a href="<?php echo base_url();?>Expertos"><i class="fa fa-user-md"></i> <span>Expertos</span></a></li>
-                        <li <?php if ($rol != 0){ echo 'style="display:none;"'; } ?>><a href="<?php echo base_url();?>Tiendas/listTiendas"><i class="fa fa-home"></i> <span>Tiendas</span></a></li>
+                        <li <?php if ($rol != 1){ echo 'style="display:none;"'; } ?>><a href="<?php echo base_url();?>Expertos/Nutricionistas"><i class="fa fa-user-md"></i> <span>Nutricionistas</span></a></li>
+                        <li <?php if ($rol != 1){ echo 'style="display:none;"'; } ?>><a href="<?php echo base_url();?>Expertos/Coach"><i class="fa fa-user-md"></i> <span>Coach</span></a></li>
+                        <li <?php if ($rol != 1){ echo 'style="display:none;"'; } ?>><a href="<?php echo base_url();?>Tiendas/listTiendas"><i class="fa fa-home"></i> <span>Tiendas</span></a></li>
                         <li <?php if ($rol != 4){ echo 'style="display:none;"'; } ?>><a href="<?php echo base_url();?>Alimento_tienda"><i class="fa fa-apple"></i> <span>Alimentos</span></a></li>
                         <li class="treeview" <?php if ($rol != 4) { echo 'style="display:none;"'; } ?>>
                             <a href="#">
@@ -151,7 +152,7 @@
                     <li>
                         <a href="<?php echo base_url();?>Tiendas" <?php if ($rol != 4){ echo 'style="display:none;"'; } ?>>Perfil</a>
                         <a href="<?php echo base_url();?>Expertos/perfil" <?php if ($rol != 2 and $rol !=3 ){ echo 'style="display:none;"'; } ?>>Perfil</a>
-                        <a href="<?php echo base_url();?>Usuarios/perfil" <?php if ($rol != 0){ echo 'style="display:none;"'; } ?>>Perfil</a>
+                        <a href="<?php echo base_url();?>Usuarios/perfil" <?php if ($rol != 1){ echo 'style="display:none;"'; } ?>>Perfil</a>
                         <a href="<?php echo base_url();?>Login/logout">Cerrar Sesion</a>
                     </li>
                   </ul><!-- /.control-sidebar-menu -->

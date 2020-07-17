@@ -6,11 +6,15 @@ class Notificaciones extends CI_Controller {
         parent::__construct();
     }
 
-    public function index(){
+    public function cabecera() {
         header("Access-Control-Allow-Origin: *");
         require_once "script/pdocrud.php";
-        $pdocrud = new PDOCrud();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("0"))){
+        return $pdocrud = new PDOCrud();
+    }
+
+    public function index(){
+        $pdocrud = $this->cabecera();
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1"))){
         	$pdocrud->setPK("idNotificacion");
             $pdocrud->crudTableCol(array("titulo","texto","push","habilitar","fecha"));
             $pdocrud->fieldTypes("push", "radio");//change gender to radio button

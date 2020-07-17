@@ -97,3 +97,8 @@ function afterUpdateCallBack2($data, $obj) {
     //$obj->formRedirection(base_url());
     $obj->formRedirection("https://eyesfoodweb.herokuapp.com/Usuarios/perfil");
 }
+
+function afterUpdateCallBack3($data, $obj) {
+    //$obj->formRedirection(base_url());
+    $obj->formRedirection("http://eyesfoodweb.herokuapp.com/Expertos/perfil");
+}

@@ -6,11 +6,15 @@ class Peligros extends CI_Controller {
         parent::__construct();
     }
 
-    public function index(){
+    public function cabecera() {
         header("Access-Control-Allow-Origin: *");
         require_once "script/pdocrud.php";
-        $pdocrud = new PDOCrud();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("0", "2"))){
+        return $pdocrud = new PDOCrud();
+    }
+
+    public function index(){
+        $pdocrud = $this->cabecera();
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
             $rol = $pdocrud->getUserSession("role");

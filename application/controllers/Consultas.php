@@ -6,10 +6,14 @@ class Consultas extends CI_Controller {
         parent::__construct();
     }
 
-    public function index(){
+    public function cabecera() {
         header("Access-Control-Allow-Origin: *");
         require_once "script/pdocrud.php";
-        $pdocrud = new PDOCrud();
+        return $pdocrud = new PDOCrud();
+    }
+
+    public function index(){
+        $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
         if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("3","2"))){
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
@@ -49,9 +53,7 @@ class Consultas extends CI_Controller {
     }
     
     public function verConsulta($id){
-        header("Access-Control-Allow-Origin: *");
-        require_once "script/pdocrud.php";
-        $pdocrud = new PDOCrud();
+        $pdocrud = $this->cabecera();
         if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("3","2"))){
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
@@ -80,9 +82,7 @@ class Consultas extends CI_Controller {
     }
 
     public function aprobarConsulta($id) {
-        header("Access-Control-Allow-Origin: *");
-        require_once "script/pdocrud.php";
-        $pdocrud = new PDOCrud();
+        $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
         if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("3","2"))){
             $estado = $pdocrud->getUserSession("estado");

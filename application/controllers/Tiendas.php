@@ -6,10 +6,14 @@ class Tiendas extends CI_Controller {
         parent::__construct();
     }
 
-    public function index(){
+    public function cabecera() {
         header("Access-Control-Allow-Origin: *");
         require_once "script/pdocrud.php";
-        $pdocrud = new PDOCrud();
+        return $pdocrud = new PDOCrud();
+    }
+
+    public function index(){
+        $pdocrud = $this->cabecera();
         if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("4"))){
             $nombreApellido = $pdocrud->getUserSession("nombre");
             $username = $pdocrud->getUserSession("userName");
@@ -41,9 +45,7 @@ class Tiendas extends CI_Controller {
     }
     
     public function editar(){
-        header("Access-Control-Allow-Origin: *");
-        require_once "script/pdocrud.php";
-        $pdocrud = new PDOCrud();
+        $pdocrud = $this->cabecera();
         if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("4"))){
             $nombreApellido = $pdocrud->getUserSession("nombre");
             $username = $pdocrud->getUserSession("userName");
@@ -55,8 +57,6 @@ class Tiendas extends CI_Controller {
             //Si esta activo
             if ($estado == 1) {
                 $pdocrud->setPK("idTienda");
-                $pdocrud->setSettings("viewBackButton", false);
-                $pdocrud->setSettings("viewPrintButton", false);
                 $pdocrud->addCallback("after_update", "afterUpdateCallBack");
                 $pdocrud->formFields(array("nombre","email","descripcion","telefono","facebook","twitter","instagram","direccion","paginaWeb"));
                 $experto = $pdocrud->dbTable("tiendas")->render("EDITFORM",array("id" =>$pdocrud->getUserSession("userId")));
@@ -74,9 +74,7 @@ class Tiendas extends CI_Controller {
     }
     
     public function cambiarPass(){
-        header("Access-Control-Allow-Origin: *");
-        require_once "script/pdocrud.php";
-        $pdocrud = new PDOCrud();
+        $pdocrud = $this->cabecera();
         if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("4"))){
             $nombreApellido = $pdocrud->getUserSession("nombre");
             $username = $pdocrud->getUserSession("userName");
@@ -120,10 +118,17 @@ class Tiendas extends CI_Controller {
     }
     
      public function listTiendas(){
-        header("Access-Control-Allow-Origin: *");
-        require_once "script/pdocrud.php";
-        $pdocrud = new PDOCrud();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("0"))){
+        $pdocrud = $this->cabecera();
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1"))){
+            $pdocrud->crudRemoveCol(array("idTienda"));
+            $pdocrud->crudTableCol(array("nombre","email","descripcion","direccion","telefono", "rss", "facebook", "twitter","instagram","paginaWeb","foto","activo"));
+            $pdocrud->formFields(array("nombre","email","descripcion","direccion","telefono", "rss", "facebook", "twitter","instagram","paginaWeb","foto","activo"));
+            $pdocrud->editFormFields(array("nombre","email","descripcion","direccion","telefono", "rss", "facebook", "twitter","instagram","paginaWeb","foto","activo"));
+            $pdocrud->fieldTypes("activo", "radio");
+            $pdocrud->fieldDataBinding("activo", array("Desactivado","Activado"), "", "","array");
+            $pdocrud->tableColFormatting("activo", "replace",array("0" =>"Desactivado"));
+            $pdocrud->tableColFormatting("activo", "replace",array("1" =>"Activado"));
+            $pdocrud->buttonHide($buttonname="cancel");
             $nombreApellido = $pdocrud->getUserSession("nombre");
             $username = $pdocrud->getUserSession("userName");
             $rol = $pdocrud->getUserSession("role");
