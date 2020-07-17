@@ -222,7 +222,7 @@ class Expertos extends CI_Controller {
     public function respuestas($IdComentario) {
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1"))){
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
             $rol = $pdocrud->getUserSession("role");
@@ -279,7 +279,7 @@ class Expertos extends CI_Controller {
     public function borraComentario($contexto ,$codigo, $IdComentario){
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("0","2"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1"))){
             echo $pdocrud->getUserSession("userId");
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_POST, 1);
@@ -296,7 +296,7 @@ class Expertos extends CI_Controller {
     public function borraRespuesta($IdComentario, $IdRespuesta){
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1","2"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1"))){
             echo $pdocrud->getUserSession("userId");
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_POST, 1);
@@ -313,7 +313,7 @@ class Expertos extends CI_Controller {
     public function comentar($contexto ,$codigo, $comentario){
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("0","2"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1"))){
             echo $contexto."\n";
             echo $codigo."\n";
             echo $pdocrud->getUserSession("role")."\n";

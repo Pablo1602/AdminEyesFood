@@ -1268,7 +1268,7 @@ class Alimentos extends CI_Controller {
     public function comentar($contexto ,$codigo, $comentario){
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1","2"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1","2","3"))){
             echo $contexto."\n";
             echo $codigo."\n";
             echo $pdocrud->getUserSession("role")."\n";
@@ -1297,7 +1297,7 @@ class Alimentos extends CI_Controller {
     public function responder($IdComentario, $comentario){
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1","2"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1","2","3"))){
             echo $pdocrud->getUserSession("role")."\n";
             echo $pdocrud->getUserSession("userId")."\n";
             echo $comentario."\n";
