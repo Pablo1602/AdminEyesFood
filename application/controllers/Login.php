@@ -141,7 +141,7 @@ class Login extends CI_Controller {
         $pdocrud->fieldNotMandatory("rss");
         $pdocrud->buttonHide($buttonname="cancel");
         $pdocrud->formAddCaptcha("captcha");
-        $pdocrud->recaptcha("6LeWsbwZAAAAAD2lJ7xiSVLjwFvaCdXShT4JikLn","6LfxrbwZAAAAAIBls-6LeWsbwZAAAAABwXmDndnHmC4MHrtbBip8qHLjg6");
+        $pdocrud->recaptcha("6LfxrbwZAAAAAIBls-6LeWsbwZAAAAABwXmDndnHmC4MHrtbBip8qHLjg6","6LeWsbwZAAAAAD2lJ7xiSVLjwFvaCdXShT4JikLn");
         $registro = $pdocrud->dbTable("tiendas")->render("insertform");
         $data['registro'] = $registro;
         $this->load->helper('url');
