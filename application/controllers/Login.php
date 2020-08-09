@@ -111,7 +111,7 @@ class Login extends CI_Controller {
         $pdocrud->buttonHide($buttonname="cancel");
         $pdocrud->formAddCaptcha("captcha");
         //$pdocrud->recaptcha("your-site-key","site-secret");
-        $pdocrud->recaptcha("6LfxrbwZAAAAADgP0izprbbKG1wfojAH2E_A_ymd","6LfxrbwZAAAAAIBls-ZhLPoIW0t9OlbBuBTQUX8o");
+        $pdocrud->recaptcha("6LeWsbwZAAAAAD2lJ7xiSVLjwFvaCdXShT4JikLn","6LfxrbwZAAAAAIBls-6LeWsbwZAAAAABwXmDndnHmC4MHrtbBip8qHLjg6");
         $registro = $pdocrud->dbTable("expertos")->render("insertform");
         $data['registro'] = $registro;
         $this->load->helper('url');
@@ -141,7 +141,7 @@ class Login extends CI_Controller {
         $pdocrud->fieldNotMandatory("rss");
         $pdocrud->buttonHide($buttonname="cancel");
         $pdocrud->formAddCaptcha("captcha");
-        $pdocrud->recaptcha("6LfxrbwZAAAAADgP0izprbbKG1wfojAH2E_A_ymd","6LfxrbwZAAAAAIBls-ZhLPoIW0t9OlbBuBTQUX8o");
+        $pdocrud->recaptcha("6LeWsbwZAAAAAD2lJ7xiSVLjwFvaCdXShT4JikLn","6LfxrbwZAAAAAIBls-6LeWsbwZAAAAABwXmDndnHmC4MHrtbBip8qHLjg6");
         $registro = $pdocrud->dbTable("tiendas")->render("insertform");
         $data['registro'] = $registro;
         $this->load->helper('url');
