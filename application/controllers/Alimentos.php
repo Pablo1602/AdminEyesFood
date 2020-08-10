@@ -173,6 +173,7 @@ class Alimentos extends CI_Controller {
             $pdocrud->crudRemoveCol(array("idPeligroAlimento","peligroAlimento","denuncia", "alimentoFront", "alimentoNutr", "alimentoIngr"));
             $pdocrud->buttonHide($buttonname="cancel");
             $pdocrud->setSettings("editbtn", false);
+            $pdocrud->setSettings("addbtn", false);
             //Si es nutricionista
             if ($rol==2) {
                 $estado = $pdocrud->getUserSession("estado");
@@ -181,7 +182,6 @@ class Alimentos extends CI_Controller {
                     $pdocrud->setSettings("viewbtn", false);
                     //$pdocrud->setSettings("editbtn", false);
                     $pdocrud->setSettings("delbtn", false);
-                    $pdocrud->setSettings("addbtn", false);
                     $pdocrud->formFields(array(/*"idPeligroAlimento","peligroAlimento",*/"indiceGlicemico"));
                     $todos = $pdocrud->dbTable("alimentos");
                     $data['alimentos'] = $todos;
@@ -229,6 +229,7 @@ class Alimentos extends CI_Controller {
             $pdocrud->setSettings("viewbtn", false);
             $pdocrud->setSettings("editbtn", false);
             $pdocrud->setSettings("delbtn", false);
+            $pdocrud->setSettings("addbtn", false);
             $action = base_url()."Alimentos/verAlimentoImagenes/{idAlimentoNuevo}";//pk will be replaced by primary key value
             $text = '<i class="fa fa-eye" aria-hidden="true"></i>';
             $attr = array("title"=>"Ver");
@@ -250,6 +251,7 @@ class Alimentos extends CI_Controller {
             $pdocrud2->setSettings("viewbtn", false);
             $pdocrud2->setSettings("editbtn", false);
             $pdocrud2->setSettings("delbtn", false);
+            $pdocrud2->setSettings("addbtn", false);
             $action = base_url()."Alimentos/verAlimentoImagenesApr/{pk}";//pk will be replaced by primary key value
             $text = '<i class="fa fa-eye" aria-hidden="true"></i>';
             $attr = array("title"=>"Ver");
@@ -1259,7 +1261,7 @@ class Alimentos extends CI_Controller {
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             $result = curl_exec($curl);
             curl_close($curl);
-            redirect('/Alimentos/respuesta/'.$IdComentario);
+            redirect('/Alimentos/respuestas/'.$IdComentario);
         }else{
             $this->load->view('403');
         }
@@ -1316,7 +1318,7 @@ class Alimentos extends CI_Controller {
             curl_close($curl);
             
         }else{
-            redirect('/Alimentos/respuesta/'.$IdComentario);
+            redirect('/Alimentos/respuestas/'.$IdComentario);
             $this->load->view('403');
         }
     }
