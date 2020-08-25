@@ -12,11 +12,11 @@ echo $alimentoDenuncia;
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Aprobar</h4>
-        Esta seguro de aprobar el alimento <?php echo ($ind["nombreAlimento"]); ?> ?
+        ¿Esta seguro de aprobar el alimento "<?php echo ($ind["nombreAlimento"]); ?> " 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-info" id="modal-btn-si">Si</button>
-        <button type="button" class="btn-danger" id="modal-btn-no">No</button>
+        <button type="button" class="btn btn-danger" id="modal-btn-no">No</button>
       </div>
     </div>
   </div>
@@ -28,14 +28,14 @@ echo $alimentoDenuncia;
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Rechazar</h4>
-        Esta seguro de rechazar el alimento <?php echo ($ind["nombreAlimento"]); ?> ?
+        ¿Esta seguro de rechazar el alimento "<?php echo ($ind["nombreAlimento"]); ?>"?
       </div>
         <div class="dialog" id="myform">
           <h5 class="modal-header">Comentario de rechazo</h5>
           <textarea type="text" style="resize:none; margin-left:10px;" rows="8" cols="30" id="texto"></textarea>
           <div class="modal-footer">
             <button type="button" class="btn btn-info" id="modal-btn-2-si">Si</button>
-            <button type="button" class="btn-danger" id="modal-btn-2-no">No</button>
+            <button type="button" class="btn btn-danger" id="modal-btn-2-no">No</button>
           </div>
         </div>
     </div>
