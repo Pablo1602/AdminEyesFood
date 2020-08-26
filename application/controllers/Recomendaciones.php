@@ -13,7 +13,7 @@ class Recomendaciones extends CI_Controller {
     }
     public function index(){
         $pdocrud = $this->cabecera();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2", "3"))){
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
             $rol = $pdocrud->getUserSession("role");
