@@ -329,6 +329,8 @@ class Alimentos extends CI_Controller {
             $pdocrud->FormSteps(array("porcion","porcionGramos","energia","proteinas","grasaTotal"), "1","tabs");
             $pdocrud->FormSteps(array("grasaSaturada","grasaMono","grasaPoli","grasaTrans","colesterol"), "2","tabs");
             $pdocrud->FormSteps(array("hidratosCarbono","azucaresTotales","fibra","sodio"), "3","tabs");
+            $pdocrud->fieldRenameLable("idUsuario", "Usuario");//Rename label
+            $pdocrud->relatedData("idUsuario", "usuarios", "idUsuario", "correo");
             $pdocrud->setSettings("viewBackButton", false);
             $pdocrud->setSettings("viewPrintButton", false);
             $pdocrud->setSettings("viewFormTabs", true);//set view form tabs enabled
@@ -584,7 +586,7 @@ class Alimentos extends CI_Controller {
             $headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
 
             //dirección del remitente 
-            $headers .= "From: EyesFood <eyesfood@correo.com>\r\n";
+            $headers .= "From: EyesFood <eyesfoodcl@gmail.com>\r\n";
             mail($destinatario,$asunto,$cuerpo,$headers);
         }
     }
@@ -600,8 +602,8 @@ class Alimentos extends CI_Controller {
                 </head> 
                 <body> 
                 <h1>Hola!</h1> 
-                <p> 
-                <b>Su solicitud de edicion de alimento ha sido aceptada</b>.</p> <p>A continuacion estan los datos del alimento que solicito subir a la plataforma.</p>  
+                <p> <b>Su solicitud de edicion de alimento ha sido aceptada</b>.</p> 
+                <p>A continuacion estan los datos del alimento que solicito subir a la plataforma.</p>  
                 <p>Codigo de Barras: '.$alimento['codigoBarras'].'</p>
                 <p>Nombre: '.$alimento['nombreAlimento'].'</p>
                 <p>Marca: '.$alimento['marca'].'</p>
@@ -615,7 +617,7 @@ class Alimentos extends CI_Controller {
             $headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
 
             //dirección del remitente 
-            $headers .= "From: EyesFood <eyesfood@correo.com>\r\n";
+            $headers .= "From: EyesFood <eyesfoodcl@gmail.com>\r\n";
             mail($destinatario,$asunto,$cuerpo,$headers);
         }
     }
@@ -631,8 +633,8 @@ class Alimentos extends CI_Controller {
                 </head> 
                 <body> 
                 <h1>Hola!</h1> 
-                <p> 
-                <b>Su solicitud de edicion de alimento ha sido rechazada.</b>.</p> 
+                <p> <b>Su solicitud de edicion de alimento ha sido rechazada.</b>.</p> 
+                <p>A continuacion estan los datos del alimento que solicito subir a la plataforma.</p>  
                 <p>Codigo de Barras: '.$alimento['codigoBarras'].'</p>
                 <p>Nombre: '.$alimento['nombreAlimento'].'</p>
                 <p>Motivo: '.$comentario['comentario'].'</p>  
@@ -645,7 +647,7 @@ class Alimentos extends CI_Controller {
             $headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
 
             //dirección del remitente 
-            $headers .= "From: EyesFood <eyesfood@correo.com>\r\n";
+            $headers .= "From: EyesFood <eyesfoodcl@gmail.com>\r\n";
             mail($destinatario,$asunto,$cuerpo,$headers);
         }
     }
@@ -661,8 +663,8 @@ class Alimentos extends CI_Controller {
                 </head> 
                 <body> 
                 <h1>Hola!</h1> 
-                <p> 
-                <b>Su solicitud de edicion de alimento ha sido rechazada.</b>.</p> 
+                <p> <b>Su solicitud de edicion de alimento ha sido rechazada.</b>.</p>
+                <p>A continuacion estan los datos del alimento que solicito editar en la plataforma.</p>  
                 <p>Codigo de Barras: '.$alimento['codigoBarras'].'</p>
                 <p>Nombre: '.$alimento['nombreAlimento'].'</p>
                 <p>Motivo: '.$comentario['comentario'].'</p>  
@@ -675,7 +677,7 @@ class Alimentos extends CI_Controller {
             $headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
 
             //dirección del remitente 
-            $headers .= "From: EyesFood <eyesfood@correo.com>\r\n";
+            $headers .= "From: EyesFood <eyesfoodcl@gmail.com>\r\n";
             mail($destinatario,$asunto,$cuerpo,$headers);
         }
     }

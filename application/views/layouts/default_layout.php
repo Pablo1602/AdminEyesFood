@@ -78,7 +78,7 @@
                       <li class="" <?php if ($rol != 1){ echo 'style="display:none;"'; } ?>>
                             <a href="<?php echo base_url();?>Notificaciones"><i class="fa fa-bullhorn"></i> <span>Notificaciones</span></a>
                         </li>
-                        <li class="treeview" <?php if ($rol == 4){ echo 'style="display:none;"'; } ?>>
+                        <li class="treeview" <?php if ($rol ==4){ echo 'style="display:none;"'; } ?>>
                             <a href="#">
                                 <i class="fa fa-apple"></i> <span>Alimentos</span>
                                 <span class="pull-right-container">
