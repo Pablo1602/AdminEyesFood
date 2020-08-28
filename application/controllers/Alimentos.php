@@ -19,7 +19,7 @@ class Alimentos extends CI_Controller {
 
     public function aceptados(){
         $pdocrud = $this->cabecera();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
             $rol = $pdocrud->getUserSession("role");
@@ -50,7 +50,7 @@ class Alimentos extends CI_Controller {
     
     public function pendientes(){
         $pdocrud = $this->cabecera();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
             $pdocrud->crudTableCol(array("idUsuario","codigoBarras", "nombreAlimento", "producto", "marca", "contenidoNeto", "ingredientes", "alergenos", "trazas"));
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
@@ -97,7 +97,7 @@ class Alimentos extends CI_Controller {
     
     public function rechazados() {
         $pdocrud = $this->cabecera();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
             $rol = $pdocrud->getUserSession("role");
@@ -142,7 +142,7 @@ class Alimentos extends CI_Controller {
     
     public function todos(){
         $pdocrud = $this->cabecera();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1","2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1","2"))){
             $rol = $pdocrud->getUserSession("role");
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
@@ -206,7 +206,7 @@ class Alimentos extends CI_Controller {
     
     public function imagenes(){
         $pdocrud = $this->cabecera();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
             $pdocrud->crudTableCol(array("idAlimentoNuevo","idUsuario","codigoBarras", "nombreAlimento", "alimentoFront", "alimentoIngr", "alimentoNutr", "alimentoOthr"));
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
@@ -282,7 +282,7 @@ class Alimentos extends CI_Controller {
     public function verAlimento($id) {
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
             $rol = $pdocrud->getUserSession("role");
@@ -317,7 +317,7 @@ class Alimentos extends CI_Controller {
     public function verAlimentoEdit($id) {
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
             $rol = $pdocrud->getUserSession("role");
@@ -363,7 +363,7 @@ class Alimentos extends CI_Controller {
     public function aprobar($id){
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1","2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1","2"))){
             $rol = $pdocrud->getUserSession("role");
             if ($rol==2) {
                 $estado = $pdocrud->getUserSession("estado");
@@ -464,7 +464,7 @@ class Alimentos extends CI_Controller {
     public function aprobarEdicion($id){
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1","2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1","2"))){
             $rol = $pdocrud->getUserSession("role");
             if ($rol==2) {
                 $estado = $pdocrud->getUserSession("estado");
@@ -686,7 +686,7 @@ class Alimentos extends CI_Controller {
     
     public function rechazar($id, $comentario){
         $pdocrud = $this->cabecera();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
             $rol = $pdocrud->getUserSession("role");
             if ($rol==2) {
                 $estado = $pdocrud->getUserSession("estado");
@@ -763,7 +763,7 @@ class Alimentos extends CI_Controller {
     public function verAlimentoImagenes($id) {
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
             $titleContent = "Alimento";
@@ -822,7 +822,7 @@ class Alimentos extends CI_Controller {
     function aprobarImg($id, $imgType){
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
             $pdomodel->where("idAlimentoNuevo", $id);
             $obj =  $pdomodel->select("alimento_nuevo");
             $alimento_ind = $obj[0];
@@ -929,7 +929,7 @@ class Alimentos extends CI_Controller {
     function aprobarImg2($codigo, $imgType){
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
             $rol = $pdocrud->getUserSession("role");
             if ($rol==2) {
                 $estado = $pdocrud->getUserSession("estado");
@@ -1053,7 +1053,7 @@ class Alimentos extends CI_Controller {
     public function verAlimentoImagenesApr($codigo) {
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
             $curl = curl_init();
             // Set some options - we are passing in a useragent too here
             curl_setopt_array($curl, [
@@ -1130,7 +1130,7 @@ class Alimentos extends CI_Controller {
     public function comentarios($contexto, $codigo) {
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
             $rol = $pdocrud->getUserSession("role");
@@ -1183,7 +1183,7 @@ class Alimentos extends CI_Controller {
     public function respuestas($IdComentario) {
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
             $rol = $pdocrud->getUserSession("role");
@@ -1226,7 +1226,7 @@ class Alimentos extends CI_Controller {
     public function correo($codigo) {
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
             $pdomodel->where("idUsuario", $codigo);
             $obj =  $pdomodel->select("usuarios");
             $usuario = $obj[0];
@@ -1274,7 +1274,7 @@ class Alimentos extends CI_Controller {
     public function comentar($contexto ,$codigo, $comentario){
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1","2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1","2"))){
             echo $contexto."\n";
             echo $codigo."\n";
             echo $pdocrud->getUserSession("role")."\n";
@@ -1303,7 +1303,7 @@ class Alimentos extends CI_Controller {
     public function responder($IdComentario, $comentario){
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1","2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1","2"))){
             echo $pdocrud->getUserSession("role")."\n";
             echo $pdocrud->getUserSession("userId")."\n";
             echo $comentario."\n";
@@ -1331,7 +1331,7 @@ class Alimentos extends CI_Controller {
         $pdocrud = $this->cabecera();
         $pdocrud2 = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
             $rol = $pdocrud->getUserSession("role");
@@ -1371,7 +1371,7 @@ class Alimentos extends CI_Controller {
     
     public function aceptadosEdit(){
         $pdocrud = $this->cabecera();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
             $pdocrud->crudTableCol(array("idUsuario","codigoBarras", "nombreAlimento", "producto", "marca", "contenidoNeto", "ingredientes", "alergenos", "trazas"));
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
@@ -1419,7 +1419,7 @@ class Alimentos extends CI_Controller {
 
     public function pendientesEdit(){
         $pdocrud = $this->cabecera();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
             $pdocrud->crudTableCol(array("idUsuario","codigoBarras", "nombreAlimento", "producto", "marca", "contenidoNeto", "ingredientes", "alergenos", "trazas"));
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
@@ -1467,7 +1467,7 @@ class Alimentos extends CI_Controller {
 
         public function rechazadosEdit(){
         $pdocrud = $this->cabecera();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
             $pdocrud->crudTableCol(array("idUsuario","codigoBarras", "nombreAlimento", "producto", "marca", "contenidoNeto", "ingredientes", "alergenos", "trazas"));
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
@@ -1515,7 +1515,7 @@ class Alimentos extends CI_Controller {
 
     public function rechazarEdicion($id, $comentario){
         $pdocrud = $this->cabecera();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2","3"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1", "2"))){
             $rol = $pdocrud->getUserSession("role");
             if ($rol==2) {
                 $estado = $pdocrud->getUserSession("estado");
