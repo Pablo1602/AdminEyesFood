@@ -290,14 +290,16 @@ class Alimentos extends CI_Controller {
             $subTitleContent = "Administracion de Alimento";
             $level = "Alimento";
             //$pdocrud->relatedData("idUsuario", "usuarios", "idUsuario", "correo");
+            $pdocrud->setPK("idAlimentoNuevo");
             $pdocrud->where("idAlimentoNuevo", $id,"=");
-            $pdocrud->FormSteps(array("idUsuario", "codigoBarras","nombreAlimento", "producto", "marca", "contenidoNeto", "ingredientes", "alergenos", "trazas"), "Información General","tabs");
+            $pdocrud->FormSteps(array("codigoBarras","nombreAlimento", "producto", "marca", "contenidoNeto", "ingredientes", "alergenos", "trazas"), "Información General","tabs");
             $pdocrud->FormSteps(array("porcion","porcionGramos","energia","proteinas","grasaTotal"), "1","tabs");
             $pdocrud->FormSteps(array("grasaSaturada","grasaMono","grasaPoli","grasaTrans","colesterol"), "2","tabs");
             $pdocrud->FormSteps(array("hidratosCarbono","azucaresTotales","fibra","sodio"), "3","tabs");
+            //$pdocrud->fieldRenameLable("idUsuario", "Usuario");//Rename label
+            //$pdocrud->relatedData("idUsuario", "usuarios", "idUsuario", "correo");
             $pdocrud->setSettings("viewBackButton", false);
             $pdocrud->setSettings("viewPrintButton", false);
-            $pdocrud->setPK("idAlimentoNuevo");
             $pdocrud->setSettings("viewFormTabs", true);//set view form tabs enabled
              //$alimento = $pdocrud->dbTable("alimento_nuevo");
             $alimento = $pdocrud->dbTable("alimento_nuevo")->render("VIEWFORM",array("id" =>$id));
@@ -325,12 +327,12 @@ class Alimentos extends CI_Controller {
             //$pdocrud->relatedData("idUsuario", "usuarios", "idUsuario", "correo");
             $pdocrud->setPK("idAlimentoDenuncia");
             $pdocrud->where("idAlimentoDenuncia", $id,"=");
-            $pdocrud->FormSteps(array("idUsuario", "codigoBarras","nombreAlimento", "producto", "marca", "contenidoNeto", "ingredientes", "alergenos", "trazas"), "Información General","tabs");
+            $pdocrud->FormSteps(array("codigoBarras","nombreAlimento", "producto", "marca", "contenidoNeto", "ingredientes", "alergenos", "trazas"), "Información General","tabs");
             $pdocrud->FormSteps(array("porcion","porcionGramos","energia","proteinas","grasaTotal"), "1","tabs");
             $pdocrud->FormSteps(array("grasaSaturada","grasaMono","grasaPoli","grasaTrans","colesterol"), "2","tabs");
             $pdocrud->FormSteps(array("hidratosCarbono","azucaresTotales","fibra","sodio"), "3","tabs");
-            $pdocrud->fieldRenameLable("idUsuario", "Usuario");//Rename label
-            $pdocrud->relatedData("idUsuario", "usuarios", "idUsuario", "correo");
+            //$pdocrud->fieldRenameLable("idUsuario", "Usuario");//Rename label
+            //$pdocrud->relatedData("idUsuario", "usuarios", "idUsuario", "correo");
             $pdocrud->setSettings("viewBackButton", false);
             $pdocrud->setSettings("viewPrintButton", false);
             $pdocrud->setSettings("viewFormTabs", true);//set view form tabs enabled

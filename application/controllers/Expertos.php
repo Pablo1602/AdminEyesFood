@@ -78,6 +78,8 @@ class Expertos extends CI_Controller {
                 $this->load->view('estado');
             }
             
+        }else{
+             $this->load->view('403');
         }
     }
     
