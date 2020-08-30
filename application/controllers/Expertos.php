@@ -14,7 +14,8 @@ class Expertos extends CI_Controller {
 
     public function index(){
         $pdocrud = $this->cabecera();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1"))){
+        //if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1"))){
+        if(false){
             $pdocrud->crudRemoveCol(array("idExperto"));
             $pdocrud->crudTableCol(array("idExperto","Nombre","Apellido","Email","Especialidad","Telefono", "Direccion", "Descripcion", "PaginaWeb", "Reputacion", "rol"));
             $pdocrud->formFields(array("nombre","apellido","email","especialidad","telefono", "direccion", "descripcion", "paginaWeb", "reputacion", "rol"));
