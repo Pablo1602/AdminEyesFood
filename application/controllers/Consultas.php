@@ -15,7 +15,7 @@ class Consultas extends CI_Controller {
     public function index(){
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("3","2"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("3","2","1"))){
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
             $rol = $pdocrud->getUserSession("role");
@@ -23,7 +23,7 @@ class Consultas extends CI_Controller {
             $subTitleContent = "Administracion de Consultas";
             $level = "Consultas";
             $estado = $pdocrud->getUserSession("estado");
-            if ($estado == 1) {
+            if ($estado == 1 and $rol != 1) {
                 $pdomodel->where("email",$username,"=");
                 $result =  $pdomodel->select("expertos");
                 $obj = $result[0];
@@ -33,6 +33,7 @@ class Consultas extends CI_Controller {
                 $pdocrud->setSettings("editbtn", false);
                 //$pdocrud->setSettings("delbtn", false);
                 $pdocrud->setSettings("addbtn", false);
+                $pdocrud->setSettings("delbtn", false);
                 $pdocrud->setSettings("viewbtn", false);
                 $action = base_url()."Consultas/verConsulta/{idConsulta}";//pk will be replaced by primary key value
                 $text = '<i class="fa fa-eye" aria-hidden="true"></i>';
@@ -42,8 +43,23 @@ class Consultas extends CI_Controller {
                 $data['consultas'] = $consultas;
                 $data['id']=NULL;
                 $this->template("Consultas", $username, $nombreApellido, $titleContent, $subTitleContent, $level, "consultas", $data, $rol);
-            //Si esta inactivo se muestra pantalla de permiso
-            }else{
+            //Para el usuario administrador
+            }else if ($rol == 1){
+                $pdocrud->crudTableCol(array("idExperto","idUsuario","fechaConsulta","fechaRespuesta",));//optional
+                $pdocrud->relatedData('idUsuario','usuarios','idUsuario','correo');
+                $pdocrud->relatedData('idExperto','expertos','idExperto','email');
+                $pdocrud->setSettings("editbtn", false);
+                //$pdocrud->setSettings("delbtn", false);
+                $pdocrud->setSettings("addbtn", false);
+                $pdocrud->setSettings("delbtn", false);
+                $pdocrud->setSettings("viewbtn", false);
+                //$pdocrud->crudRemoveCol(array("Acciones"));
+                $consultas = $pdocrud->dbTable("consultas")->render();
+                $data['consultas'] = $consultas;
+                $data['id']=NULL;
+                $this->template("Consultas", $username, $nombreApellido, $titleContent, $subTitleContent, $level, "consultas", $data, $rol);
+            }
+            else{
                 $this->load->view('estado');
             }
             
@@ -54,7 +70,7 @@ class Consultas extends CI_Controller {
     
     public function verConsulta($id){
         $pdocrud = $this->cabecera();
-        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("3","2"))){
+        if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("3","2","1"))){
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");
             $rol = $pdocrud->getUserSession("role");

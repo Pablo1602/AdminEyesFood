@@ -114,7 +114,7 @@
                                 <!--<li><a href="<?php echo base_url();?>Peligros/index"><i class="fa fa-exclamation-triangle"></i> <span>Peligros</span></a></li>-->
                             </ul>
                         </li>
-                        <li class="" <?php if ($rol != 1){ echo 'style="display:none;"'; } ?>>
+                        <li class="" <?php if ($rol != 3 and $rol!=2 and $rol!=1){ echo 'style="display:none;"'; } ?>>
                             <a href="<?php echo base_url();?>Consultas"><i class="fa fa-file"></i> <span>Consultas</span></a>
                         </li>
                         <li <?php if ($rol != 1){ echo 'style="display:none;"'; } ?>><a href="<?php echo base_url();?>Expertos/Nutricionistas"><i class="fa fa-user-md"></i> <span>Nutricionistas</span></a></li>

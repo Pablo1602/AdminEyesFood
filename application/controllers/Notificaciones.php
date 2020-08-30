@@ -23,11 +23,13 @@ class Notificaciones extends CI_Controller {
             $pdocrud->fieldDataBinding("habilitar", array("No", "Si"), "", "","array");//add data for radio button
             $pdocrud->tableColFormatting("push", "replace",array("0" =>"No"));
             $pdocrud->tableColFormatting("push", "replace",array("1" =>"Si"));
+            $pdocrud->fieldRenameLable("push", "recordatorio");//Rename label
             $pdocrud->tableColFormatting("habilitar", "replace",array("0" =>"No"));
             $pdocrud->tableColFormatting("habilitar", "replace",array("1" =>"Si"));
             $pdocrud->formFields(array("titulo","texto","push","habilitar"));
             $pdocrud->editFormFields(array("titulo","texto","push","habilitar"));
             $pdocrud->buttonHide($buttonname="cancel");
+            $pdocrud->setSettings("viewbtn", false);
             $notificaciones = $pdocrud->dbTable("notificaciones");
             $data['notificaciones'] = $notificaciones;
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
