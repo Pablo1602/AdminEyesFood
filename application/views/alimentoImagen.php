@@ -61,8 +61,8 @@ height:100%;/* only if you want fixed height */
                           Esta seguro de aprobar la imagen frontal del alimento <?php echo ($ind["idAlimentoNuevo"]); ?> ?
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-default" id="modal-btn-si">Si</button>
-                          <button type="button" class="btn btn-primary" id="modal-btn-no">No</button>
+                          <button type="button" class="btn btn-info" id="modal-btn-si">Si</button>
+                          <button type="button" class="btn btn-danger" id="modal-btn-no">No</button>
                         </div>
                       </div>
                     </div>
@@ -90,8 +90,8 @@ height:100%;/* only if you want fixed height */
                           Esta seguro de aprobar la imagen de los ingredientes del alimento <?php echo ($ind["idAlimentoNuevo"]); ?> ?
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-default" id="modal-btn-si2">Si</button>
-                          <button type="button" class="btn btn-primary" id="modal-btn-no2">No</button>
+                          <button type="button" class="btn btn-info" id="modal-btn-si2">Si</button>
+                          <button type="button" class="btn btn-danger" id="modal-btn-no2">No</button>
                         </div>
                       </div>
                     </div>
@@ -119,8 +119,8 @@ height:100%;/* only if you want fixed height */
                           Esta seguro de aprobar la imagen de la informacion nutricional del alimento <?php echo ($ind["idAlimentoNuevo"]); ?> ?
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-default" id="modal-btn-si3">Si</button>
-                          <button type="button" class="btn btn-primary" id="modal-btn-no3">No</button>
+                          <button type="button" class="btn btn-info" id="modal-btn-si3">Si</button>
+                          <button type="button" class="btn btn-danger" id="modal-btn-no3">No</button>
                         </div>
                       </div>
                     </div>

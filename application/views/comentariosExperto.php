@@ -72,8 +72,8 @@ input[type=text]{
       </label>
       <textarea type="text" style="resize:none; margin-left:10px;" rows="8" cols="30" id="texto"></textarea>
       <div align="center">
-        <input type="button" value="Ok" id="btnOK">
-        <input type="button" value="Cancelar" id="btnNo">
+        <input type="button" class="btn btn-info" value="Ok" id="btnOK">
+        <input type="button" class="btn btn-danger" value="Cancelar" id="btnNo">
       </div>
 	</form>
   </div>

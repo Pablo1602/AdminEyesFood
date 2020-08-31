@@ -118,7 +118,7 @@
                             <a href="<?php echo base_url();?>Consultas"><i class="fa fa-file"></i> <span>Consultas</span></a>
                         </li>
                         <li <?php if ($rol != 1){ echo 'style="display:none;"'; } ?>><a href="<?php echo base_url();?>Expertos/Nutricionistas"><i class="fa fa-user-md"></i> <span>Nutricionistas</span></a></li>
-                        <li <?php if ($rol != 1){ echo 'style="display:none;"'; } ?>><a href="<?php echo base_url();?>Expertos/Coach"><i class="fa fa-user-md"></i> <span>Coach</span></a></li>
+                        <li <?php if ($rol != 1){ echo 'style="display:none;"'; } ?>><a href="<?php echo base_url();?>Expertos/Coach"><i class="fa fa-user-md"></i> <span>Coachs</span></a></li>
                         <li <?php if ($rol != 1){ echo 'style="display:none;"'; } ?>><a href="<?php echo base_url();?>Tiendas/listTiendas"><i class="fa fa-home"></i> <span>Tiendas</span></a></li>
                         <li <?php if ($rol != 4){ echo 'style="display:none;"'; } ?>><a href="<?php echo base_url();?>Alimento_tienda"><i class="fa fa-apple"></i> <span>Alimentos</span></a></li>
                         <li class="treeview" <?php if ($rol != 4) { echo 'style="display:none;"'; } ?>>

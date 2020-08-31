@@ -76,8 +76,8 @@ input[type=text]{
       </label>
       <input type="text" id="name">
       <div align="center">
-        <input type="button" value="Ok" id="btnOK">
-        <input type="button" value="Cancelar" id="btnNo">
+        <input type="button" class="btn btn-info" value="Ok" id="btnOK">
+        <input type="button" class="btn btn-danger" value="Cancelar" id="btnNo">
       </div>
 	</form>
   </div>
