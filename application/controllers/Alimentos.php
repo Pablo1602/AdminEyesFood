@@ -1275,15 +1275,19 @@ class Alimentos extends CI_Controller {
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
         if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1","2"))){
-            echo $contexto."\n";
-            echo $codigo."\n";
-            echo $pdocrud->getUserSession("role")."\n";
-            echo $pdocrud->getUserSession("userId")."\n";
-            echo $comentario."\n";
+            $hoy = gmdate('Y-m-d h:i:s');
+            echo $contexto." \n";
+            echo $codigo." \n";
+            echo $pdocrud->getUserSession("role")." \n";
+            echo $pdocrud->getUserSession("userId")." \n";
+            echo $comentario." \n";
+            echo $hoy." \n";
+            echo urlApiComments.'comments/'.$contexto.'/'.$codigo." \n";
             $data_array =  array(
                     "idColaborador"        => $pdocrud->getUserSession("role"),
                     "colaborador"        => $pdocrud->getUserSession("userId"),
                     "comentario"        => urldecode ( $comentario ),
+                    "fecha"        => $hoy,
               );
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_POST, 1);
