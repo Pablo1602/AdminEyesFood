@@ -293,7 +293,6 @@ class Expertos extends CI_Controller {
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
         if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1"))){
-            echo $pdocrud->getUserSession("userId");
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_POST, 1);
             curl_setopt($curl, CURLOPT_URL, $this->urlApiComments.'comments/borrar/'.$IdComentario);
@@ -302,7 +301,8 @@ class Expertos extends CI_Controller {
             curl_close($curl);
             redirect('/Expertos/comentarios/'.$contexto.'/'.$codigo);
         }else{
-            $this->load->view('403');
+            redirect('/Expertos/comentarios/'.$contexto.'/'.$codigo);
+            //$this->load->view('403');
         }
     }
 
@@ -319,7 +319,8 @@ class Expertos extends CI_Controller {
             curl_close($curl);
             redirect('/Expertos/respuesta/'.$IdComentario);
         }else{
-            $this->load->view('403');
+            redirect('/Expertos/respuesta/'.$IdComentario);
+            //$this->load->view('403');
         }
     }
 
@@ -327,15 +328,12 @@ class Expertos extends CI_Controller {
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
         if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1"))){
-            echo $contexto."\n";
-            echo $codigo."\n";
-            echo $pdocrud->getUserSession("role")."\n";
-            echo $pdocrud->getUserSession("userId")."\n";
-            echo $comentario."\n";
+            $hoy = gmdate('Y-m-d h:i:s');
             $data_array =  array(
                     "idColaborador"        => $pdocrud->getUserSession("role"),
                     "colaborador"        => $pdocrud->getUserSession("userId"),
                     "comentario"        => urldecode ( $comentario ),
+                    "fecha"        => $hoy,
               );
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_POST, 1);
@@ -343,9 +341,8 @@ class Expertos extends CI_Controller {
             curl_setopt($curl, CURLOPT_URL, $this->urlApiComments.'comments/'.$contexto.'/'.$codigo);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             $result = curl_exec($curl);
-            echo $result;
             curl_close($curl);
-            
+            redirect('/Expertos/comentarios/'.$contexto.'/'.$codigo);
         }else{
             redirect('/Expertos/comentarios/'.$contexto.'/'.$codigo);
             $this->load->view('403');
@@ -356,12 +353,12 @@ class Expertos extends CI_Controller {
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
         if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1","2"))){
-            echo $pdocrud->getUserSession("role")."\n";
-
+            $hoy = gmdate('Y-m-d h:i:s');
             $data_array =  array(
                     "idColaborador"        => $pdocrud->getUserSession("role"),
                     "colaborador"        => $pdocrud->getUserSession("userId"),
                     "comentario"        => urldecode ( $comentario ),
+                    "fecha"        => $hoy,
               );
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_POST, 1);
@@ -372,7 +369,8 @@ class Expertos extends CI_Controller {
             curl_close($curl);
             redirect('/Expertos/respuesta/'.$IdComentario);
         }else{
-            $this->load->view('403');
+            redirect('/Expertos/respuesta/'.$IdComentario);
+            //$this->load->view('403');
         }
     }
 }

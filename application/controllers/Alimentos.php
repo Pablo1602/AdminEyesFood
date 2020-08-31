@@ -1250,7 +1250,8 @@ class Alimentos extends CI_Controller {
             curl_close($curl);
             redirect('/Alimentos/comentarios/'.$contexto.'/'.$codigo);
         }else{
-            $this->load->view('403');
+            redirect('/Alimentos/comentarios/'.$contexto.'/'.$codigo);
+            //$this->load->view('403');
         }
     }
 
@@ -1267,7 +1268,8 @@ class Alimentos extends CI_Controller {
             curl_close($curl);
             redirect('/Alimentos/respuestas/'.$IdComentario);
         }else{
-            $this->load->view('403');
+            redirect('/Alimentos/respuestas/'.$IdComentario);
+            //$this->load->view('403');
         }
     }
     
@@ -1276,13 +1278,6 @@ class Alimentos extends CI_Controller {
         $pdomodel = $pdocrud->getPDOModelObj();
         if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1","2"))){
             $hoy = gmdate('Y-m-d h:i:s');
-            echo $contexto." \n";
-            echo $codigo." \n";
-            echo $pdocrud->getUserSession("role")." \n";
-            echo $pdocrud->getUserSession("userId")." \n";
-            echo $comentario." \n";
-            echo $hoy." \n";
-            echo urlApiComments.'comments/'.$contexto.'/'.$codigo." \n";
             $data_array =  array(
                     "idColaborador"        => $pdocrud->getUserSession("role"),
                     "colaborador"        => $pdocrud->getUserSession("userId"),
@@ -1295,11 +1290,9 @@ class Alimentos extends CI_Controller {
             curl_setopt($curl, CURLOPT_URL, $this->urlApiComments.'comments/'.$contexto.'/'.$codigo);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             $result = curl_exec($curl);
-            echo $result;
             curl_close($curl);
-            
-        }else{
             redirect('/Alimentos/comentarios/'.$contexto.'/'.$codigo);
+        }else{
             $this->load->view('403');
         }
     }
@@ -1308,13 +1301,12 @@ class Alimentos extends CI_Controller {
         $pdocrud = $this->cabecera();
         $pdomodel = $pdocrud->getPDOModelObj();
         if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1","2"))){
-            echo $pdocrud->getUserSession("role")."\n";
-            echo $pdocrud->getUserSession("userId")."\n";
-            echo $comentario."\n";
+            $hoy = gmdate('Y-m-d h:i:s');
             $data_array =  array(
                     "idColaborador"        => $pdocrud->getUserSession("role"),
                     "colaborador"        => $pdocrud->getUserSession("userId"),
                     "comentario"        => urldecode ( $comentario ),
+                    "fecha"        => $hoy,
               );
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_POST, 1);
@@ -1322,11 +1314,9 @@ class Alimentos extends CI_Controller {
             curl_setopt($curl, CURLOPT_URL, $this->urlApiComments.'comments/respuesta/'.$IdComentario);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             $result = curl_exec($curl);
-            echo $result;
             curl_close($curl);
-            
-        }else{
             redirect('/Alimentos/respuestas/'.$IdComentario);
+        }else{
             $this->load->view('403');
         }
     }
