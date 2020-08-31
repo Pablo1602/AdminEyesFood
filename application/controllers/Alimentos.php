@@ -1142,7 +1142,7 @@ class Alimentos extends CI_Controller {
             curl_setopt_array($curl, [
                 CURLOPT_RETURNTRANSFER => 1,
                 CURLOPT_URL => $this->
-                    urlApiComments."comments/".$contexto."/".$codigo ,
+                    urlApiComments."comments/web/".$contexto."/".$codigo ,
                 CURLOPT_USERAGENT => 'EyesFood'
             ]);
             // Send the request & save response to $resp
