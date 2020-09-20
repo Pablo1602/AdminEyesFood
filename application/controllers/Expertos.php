@@ -23,8 +23,7 @@ class Expertos extends CI_Controller {
             $pdocrud->tableColFormatting("rol", "replace",array("2" =>"Nutricionista"));
             $pdocrud->tableColFormatting("rol", "replace",array("3" =>"Coach"));
             $pdocrud->fieldTypes("rol", "radio");//change gender to radio button
-            $roles = array("2"=>"Nutricionista","3"=>"Coucher");
-            $pdocrud->fieldDataBinding("rol", $roles, "", "","array");//add data for radio button
+            $pdocrud->fieldDataBinding("rol", array("2"=>"Nutricionista","3"=>"Coucher"), "", "","array");//add data for radio button
             $expertos = $pdocrud->dbTable("expertos");
             $nombreApellido = $pdocrud->getUserSession("nombre")." ".$pdocrud->getUserSession("apellido");
             $username = $pdocrud->getUserSession("userName");

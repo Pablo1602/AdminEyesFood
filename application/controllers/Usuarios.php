@@ -17,22 +17,22 @@ class Usuarios extends CI_Controller {
         if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1"))){
             $pdocrud->crudRemoveCol(array("idUsuario"));
             $pdocrud->crudTableCol(array("Nombre","Apellido","Correo","Sexo","Estatura", "rol","Activo"));
-            $pdocrud->fieldTypes("Sexo", "radio");//change gender to radio button
-            $pdocrud->fieldTypes("Activo", "radio");
-            $pdocrud->fieldTypes("rol", "radio");
-            $pdocrud->fieldDataBinding("Sexo", array("M","F"), "", "","array");//add data for radio button
-            $pdocrud->fieldDataBinding("Activo", array("Desactivado","Activado"), "", "","array");
-            $pdocrud->fieldDataBinding("rol", array("Usuario","Administrador"), "", "","array");
-            $pdocrud->fieldTypes("hash_password", "password", array("encryption"=>"sha1"));
-            $pdocrud->checkDuplicateRecord(array("Correo"));
+            $pdocrud->formFields(array("Nombre","Apellido","Correo", "hash_password", "Sexo","rol","Activo"));
+            $pdocrud->editFormFields(array("Nombre","Apellido", "Correo", "Sexo","rol","Activo"));
             $pdocrud->tableColFormatting("Sexo", "replace",array("0" =>"M"));
             $pdocrud->tableColFormatting("Sexo", "replace",array("1" =>"F"));
             $pdocrud->tableColFormatting("Activo", "replace",array("0" =>"Desactivado"));
             $pdocrud->tableColFormatting("Activo", "replace",array("1" =>"Activado"));
             $pdocrud->tableColFormatting("rol", "replace",array("1" =>"Administrador"));
             $pdocrud->tableColFormatting("rol", "replace",array("5" =>"Usuario"));
-            $pdocrud->formFields(array("Nombre","Apellido","Correo", "hash_password", "Sexo","Activo"));
-            $pdocrud->editFormFields(array("Nombre","Apellido", "Correo", "Sexo","rol","Activo"));
+            $pdocrud->fieldTypes("Sexo", "radio");//change gender to radio button
+            $pdocrud->fieldTypes("Activo", "radio");
+            $pdocrud->fieldTypes("rol", "radio");
+            $pdocrud->fieldDataBinding("Sexo", array("M","F"), "", "","array");//add data for radio button
+            $pdocrud->fieldDataBinding("Activo", array("Desactivado","Activado"), "", "","array");
+            $pdocrud->fieldDataBinding("rol", array("1" =>"Administrador","5" =>"Usuario"), "", "","array");
+            $pdocrud->fieldTypes("hash_password", "password", array("encryption"=>"sha1"));
+            $pdocrud->checkDuplicateRecord(array("Correo"));
             $pdocrud->buttonHide($buttonname="cancel");
             //$pdocrud->where("rol","5","="); muestra solo usuarios de la app móvil
             $usuarios = $pdocrud->dbTable("usuarios");
