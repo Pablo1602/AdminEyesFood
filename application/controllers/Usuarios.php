@@ -22,7 +22,7 @@ class Usuarios extends CI_Controller {
             $pdocrud->fieldTypes("rol", "radio");
             $pdocrud->fieldDataBinding("Sexo", array("M","F"), "", "","array");//add data for radio button
             $pdocrud->fieldDataBinding("Activo", array("Desactivado","Activado"), "", "","array");
-            $pdocrud->fieldDataBinding("rol", array("Administrador","Usuario"), "", "","array");
+            $pdocrud->fieldDataBinding("rol", array("Usuario","Administrador"), "", "","array");
             $pdocrud->fieldTypes("hash_password", "password", array("encryption"=>"sha1"));
             $pdocrud->checkDuplicateRecord(array("Correo"));
             $pdocrud->tableColFormatting("Sexo", "replace",array("0" =>"M"));
