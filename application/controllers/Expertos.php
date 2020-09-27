@@ -114,13 +114,13 @@ class Expertos extends CI_Controller {
         $pdocrud = $this->cabecera();
         if($pdocrud->checkUserSession("userId") and $pdocrud->checkUserSession("role", array("1"))){
             $pdocrud->crudRemoveCol(array("idExperto","rol"));
-            $pdocrud->crudTableCol(array("Nombre","Apellido","Email","Especialidad","Telefono", "Direccion", "Descripcion", "PaginaWeb","Activo"));
-            $pdocrud->formFields(array("nombre","apellido","email","especialidad","telefono", "direccion", "descripcion", "paginaWeb", "Activo"));
-            $pdocrud->editFormFields(array("nombre","apellido","email","especialidad","telefono", "direccion", "descripcion", "paginaWeb","rol", "Activo"));
-            $pdocrud->fieldTypes("Activo", "radio");
-            $pdocrud->fieldDataBinding("Activo", array("Desactivado","Activado"), "", "","array");
-            $pdocrud->tableColFormatting("Activo", "replace",array("0" =>"Desactivado"));
-            $pdocrud->tableColFormatting("Activo", "replace",array("1" =>"Activado"));
+            $pdocrud->crudTableCol(array("Nombre","Apellido","Email","Especialidad","Telefono", "Direccion", "Descripcion", "PaginaWeb","activo"));
+            $pdocrud->formFields(array("nombre","apellido","email","especialidad","telefono", "direccion", "descripcion", "paginaWeb", "activo"));
+            $pdocrud->editFormFields(array("nombre","apellido","email","especialidad","telefono", "direccion", "descripcion", "paginaWeb","rol", "activo"));
+            $pdocrud->fieldTypes("activo", "radio");
+            $pdocrud->fieldDataBinding("activo", array("Desactivado","Activado"), "", "","array");
+            $pdocrud->tableColFormatting("activo", "replace",array("0" =>"Desactivado"));
+            $pdocrud->tableColFormatting("activo", "replace",array("1" =>"Activado"));
             $pdocrud->tableColFormatting("rol", "replace",array("2" =>"Nutricionista"));
             $pdocrud->tableColFormatting("rol", "replace",array("3" =>"Coach"));
             $pdocrud->fieldTypes("rol", "radio");//change gender to radio button
