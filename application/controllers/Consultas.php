@@ -137,7 +137,7 @@ class Consultas extends CI_Controller {
                 $headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
 
                 //dirección del remitente 
-                $headers .= "From: EyesFood <eyesfood@correo.com>\r\n"; 
+                $headers .= "From: EyesFood <eyesfoodcl@gmail.com>\r\n"; 
                 mail($destinatario,$asunto,$cuerpo,$headers);
                 $date = date("Y-m-d H:i:s");
                 $updateData = array("fechaRespuesta"=> $date);
