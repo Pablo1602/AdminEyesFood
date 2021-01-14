@@ -109,9 +109,9 @@ class Login extends CI_Controller {
         $pdocrud->fieldNotMandatory("direccion");
         $pdocrud->fieldNotMandatory("paginaWeb");
         $pdocrud->buttonHide($buttonname="cancel");
-        $pdocrud->formAddCaptcha("captcha");
+        //$pdocrud->formAddCaptcha("captcha");
         //$pdocrud->recaptcha("your-site-key","site-secret");
-        $pdocrud->recaptcha("6LeWsbwZAAAAAD2lJ7xiSVLjwFvaCdXShT4JikLn","6LeWsbwZAAAAABwXmDndnHmC4MHrtbBip8qHLjg6");
+        //$pdocrud->recaptcha("6LeWsbwZAAAAAD2lJ7xiSVLjwFvaCdXShT4JikLn","6LeWsbwZAAAAABwXmDndnHmC4MHrtbBip8qHLjg6");
         $registro = $pdocrud->dbTable("expertos")->render("insertform");
         $data['registro'] = $registro;
         $this->load->helper('url');
