@@ -33,7 +33,7 @@ class Consultas extends CI_Controller {
                 $pdocrud->setSettings("editbtn", false);
                 //$pdocrud->setSettings("delbtn", false);
                 $pdocrud->setSettings("addbtn", false);
-                $pdocrud->setSettings("delbtn", false);
+                //$pdocrud->setSettings("delbtn", false);
                 $pdocrud->setSettings("viewbtn", false);
                 $action = base_url()."Consultas/verConsulta/{idConsulta}";//pk will be replaced by primary key value
                 $text = '<i class="fa fa-eye" aria-hidden="true"></i>';
