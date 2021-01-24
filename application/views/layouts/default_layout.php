@@ -188,10 +188,10 @@
             <footer class="main-footer">
               <!-- To the right -->
               <div class="pull-right hidden-xs">
-                EyesFood 2019
+                EyesFood 2021
               </div>
               <!-- Default to the left -->
-              <strong>Copyright &copy; 2019 <a href="#">EyesFood</a>.</strong> Todos los derechos reservados.
+              <strong>Copyright &copy; 2021 <a href="#">EyesFood</a>.</strong> Todos los derechos reservados.
             </footer>
         </div><!-- ./wrapper -->
         <!-- REQUIRED JS SCRIPTS -->
